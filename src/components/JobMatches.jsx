@@ -119,12 +119,13 @@ export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
                   <div><strong>Required experience:</strong> {job.requiredExperience || 'Not listed'}</div>
                   <div><strong>Team:</strong> {job.team || 'Not listed'}</div>
                   <div><strong>Posted date:</strong> {job.postedDate || 'Not listed'}</div>
-                  <div><strong>Match source:</strong> {job.matchSource === 'ai' ? 'AI (holistic)' : 'Fallback (skills-based)'}</div>
+                  <div><strong>Match source:</strong> Weighted skills/certs baseline {job.matchSource === 'ai' ? ' + AI insights' : ''}</div>
                 </div>
                 {job.aiInsights && (
                   <div>
                     <strong>AI fit breakdown:</strong>
                     <ul className="job-details-list">
+                      <li>Holistic AI match: {job.aiMatchScore}%</li>
                       <li>Experience fit: {job.aiInsights.experienceScore}%</li>
                       <li>Skills fit: {job.aiInsights.skillsScore}%</li>
                       <li>Role alignment: {job.aiInsights.roleAlignmentScore}%</li>
