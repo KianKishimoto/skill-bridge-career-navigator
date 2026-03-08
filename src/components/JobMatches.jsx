@@ -1,8 +1,28 @@
 import { useState, useMemo } from 'react';
 import { matchJobsToProfile } from '../services/jobMatching';
 
+const renderList = (items) => {
+  if (!items?.length) return null;
+  return (
+    <ul className="job-details-list">
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+};
+
 export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
   const [expandedId, setExpandedId] = useState(null);
+
+  const getDescriptionPreview = (description = '') => {
+    const trimmedDescription = description.trim();
+    if (trimmedDescription.length <= 180) {
+      return trimmedDescription;
+    }
+
+    return `${trimmedDescription.slice(0, 180)}...`;
+  };
 
   const filteredAndMatched = useMemo(() => {
     let result = matchJobsToProfile(profile || {}, jobs || []);
@@ -56,13 +76,54 @@ export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
                 {job.matchScore}% match
               </span>
             </div>
-            <p className="job-desc">{job.description}</p>
+            <p className="job-desc">{getDescriptionPreview(job.description)}</p>
             {expandedId === job.id && (
               <div className="job-details">
                 <div>
-                  <strong>Required:</strong>{' '}
-                  {(job.requiredSkills || []).join(', ')}
+                  <strong>Full description:</strong>
+                  <p className="job-full-desc">{job.description}</p>
                 </div>
+                <div className="job-meta-grid">
+                  <div><strong>Salary:</strong> {job.salaryEstimate || 'Not listed'}</div>
+                  <div><strong>Employment type:</strong> {job.employmentType || 'Not listed'}</div>
+                  <div><strong>Required experience:</strong> {job.requiredExperience || 'Not listed'}</div>
+                  <div><strong>Team:</strong> {job.team || 'Not listed'}</div>
+                  <div><strong>Posted date:</strong> {job.postedDate || 'Not listed'}</div>
+                </div>
+                <div>
+                  <strong>Required skills:</strong>
+                  {renderList(job.requiredSkills)}
+                </div>
+                {job.preferredSkills?.length > 0 && (
+                  <div>
+                    <strong>Preferred skills:</strong>
+                    {renderList(job.preferredSkills)}
+                  </div>
+                )}
+                {job.responsibilities?.length > 0 && (
+                  <div>
+                    <strong>Responsibilities:</strong>
+                    {renderList(job.responsibilities)}
+                  </div>
+                )}
+                {job.minimumQualifications?.length > 0 && (
+                  <div>
+                    <strong>Minimum qualifications:</strong>
+                    {renderList(job.minimumQualifications)}
+                  </div>
+                )}
+                {job.preferredQualifications?.length > 0 && (
+                  <div>
+                    <strong>Preferred qualifications:</strong>
+                    {renderList(job.preferredQualifications)}
+                  </div>
+                )}
+                {job.benefits?.length > 0 && (
+                  <div>
+                    <strong>Benefits:</strong>
+                    {renderList(job.benefits)}
+                  </div>
+                )}
                 {job.missingSkills?.length > 0 && (
                   <div className="missing">
                     <strong>You're missing:</strong>{' '}

@@ -290,6 +290,26 @@ ul {
   font-size: 0.9rem;
 }
 
+.job-full-desc {
+  margin: 0.35rem 0 0.75rem;
+  color: var(--text);
+}
+
+.job-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.job-details-list {
+  margin: 0.35rem 0 0.75rem;
+}
+
+.job-details-list li {
+  margin-bottom: 0.2rem;
+}
+
 .job-details .missing {
   color: var(--warning);
   margin-top: 0.5rem;

@@ -21,10 +21,8 @@ export function matchJobsToProfile(profile, jobs) {
     ).length;
 
     const requiredTotal = required.length || 1;
-    const matchScore =
-      (requiredMatch / requiredTotal) * 60 +
-      (preferredMatch / Math.max(preferred.length, 1)) * 25 +
-      (certMatch / Math.max(jobCerts.length, 1)) * 15;
+    // Keep Job Matches % aligned with Role Pivot's required-skills match percentage.
+    const matchScore = (requiredMatch / requiredTotal) * 100;
 
     const missingSkills = requiredSkills.filter(
       (skill) => !userSkills.has(skill.toLowerCase())
@@ -38,6 +36,10 @@ export function matchJobsToProfile(profile, jobs) {
       matchScore: Math.round(matchScore),
       matchedSkills: requiredMatch,
       totalRequired: required.length,
+      preferredMatchedSkills: preferredMatch,
+      totalPreferred: preferred.length,
+      matchedCertifications: certMatch,
+      totalCertifications: jobCerts.length,
       missingSkills,
       missingCerts,
     };
