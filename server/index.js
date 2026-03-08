@@ -95,10 +95,10 @@ const listSupportedGeminiModels = async (apiKey) => {
 
 const pickPreferredGeminiModel = (availableModels) => {
   const preferredModels = [
-    'models/gemini-2.0-flash',
-    'models/gemini-2.0-flash-lite',
-    'models/gemini-1.5-flash-latest',
-    'models/gemini-1.5-flash',
+    // 'models/gemini-2.0-flash',
+    // 'models/gemini-2.0-flash-lite',
+    'models/gemini-2.5-flash-latest',
+    'models/gemini-2.5-flash',
   ];
 
   return preferredModels.find((model) => availableModels.includes(model)) || availableModels[0];
@@ -156,7 +156,7 @@ const extractWithAI = async (resumeText) => {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error('GEMINI_API_KEY not configured');
 
-  const configuredModel = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+  const configuredModel = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
 
   try {
     return await requestGeminiExtraction({
