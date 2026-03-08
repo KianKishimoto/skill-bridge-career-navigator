@@ -130,12 +130,75 @@ ${resumeText}`,
   ],
 });
 
+const buildJobMatchRequest = ({ profile, jobs }) => ({
+  generationConfig: {
+    temperature: 0.1,
+    responseMimeType: 'application/json',
+  },
+  contents: [
+    {
+      parts: [
+        {
+          text: `You are scoring job fit for a candidate profile.
+Return ONLY valid JSON with this exact structure:
+{
+  "matches": [
+    {
+      "jobId": "string",
+      "matchScore": 0,
+      "experienceScore": 0,
+      "skillsScore": 0,
+      "roleAlignmentScore": 0,
+      "reasoning": "short explanation"
+    }
+  ]
+}
+
+Scoring rules:
+- All score fields are integers from 0 to 100.
+- Consider required experience, relevance of past experience to job responsibilities/description, and skills overlap.
+- A high score requires strong alignment across skills and experience, not just keyword overlap.
+- Keep reasoning to 1 concise sentence.
+
+Candidate profile JSON:
+${JSON.stringify(profile)}
+
+Jobs JSON:
+${JSON.stringify(jobs)}`,
+        },
+      ],
+    },
+  ],
+});
+
 const requestGeminiExtraction = async ({ apiKey, model, resumeText }) => {
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/${normalizeModelName(model)}:generateContent?key=${apiKey}`;
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(buildGeminiRequest(resumeText)),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    const errorCode = parseGeminiErrorCode(errorBody);
+    const error = new Error(`Gemini API request failed (${response.status}): ${errorBody}`);
+    error.status = response.status;
+    error.code = errorCode;
+    throw error;
+  }
+
+  const data = await response.json();
+  const content = data?.candidates?.[0]?.content?.parts?.map((part) => part?.text || '').join('\n');
+  return extractJsonFromText(content);
+};
+
+const requestGeminiJobMatch = async ({ apiKey, model, profile, jobs }) => {
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/${normalizeModelName(model)}:generateContent?key=${apiKey}`;
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(buildJobMatchRequest({ profile, jobs })),
   });
 
   if (!response.ok) {
@@ -184,6 +247,73 @@ const extractWithAI = async (resumeText) => {
 
     return requestGeminiExtraction({ apiKey, model: detectedModel, resumeText });
   }
+};
+
+const matchJobsWithAI = async (profile, jobs) => {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error('GEMINI_API_KEY not configured');
+
+  const configuredModel = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
+
+  try {
+    return await requestGeminiJobMatch({
+      apiKey,
+      model: configuredModel,
+      profile,
+      jobs,
+    });
+  } catch (error) {
+    const shouldRetryWithDetectedModel = (
+      !process.env.GEMINI_MODEL
+      && error.status === 404
+      && error.code === 'NOT_FOUND'
+    );
+
+    if (!shouldRetryWithDetectedModel) {
+      throw error;
+    }
+
+    const availableModels = await listSupportedGeminiModels(apiKey);
+    const detectedModel = pickPreferredGeminiModel(availableModels);
+
+    if (!detectedModel) {
+      throw new Error('No Gemini models with generateContent support are available for this API key');
+    }
+
+    return requestGeminiJobMatch({ apiKey, model: detectedModel, profile, jobs });
+  }
+};
+
+const clampScore = (value) => {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return 0;
+  return Math.max(0, Math.min(100, Math.round(numeric)));
+};
+
+const sanitizeAiJobMatches = (jobs, aiResponse) => {
+  const jobsById = new Map((jobs || []).map((job) => [String(job.id), job]));
+  const aiMatches = Array.isArray(aiResponse?.matches) ? aiResponse.matches : [];
+  const aiById = new Map(
+    aiMatches
+      .filter((match) => match?.jobId !== undefined && match?.jobId !== null)
+      .map((match) => [String(match.jobId), match])
+  );
+
+  return (jobs || []).map((job) => {
+    const aiMatch = aiById.get(String(job.id));
+    if (!aiMatch || !jobsById.has(String(job.id))) {
+      return null;
+    }
+
+    return {
+      jobId: String(job.id),
+      matchScore: clampScore(aiMatch.matchScore),
+      experienceScore: clampScore(aiMatch.experienceScore),
+      skillsScore: clampScore(aiMatch.skillsScore),
+      roleAlignmentScore: clampScore(aiMatch.roleAlignmentScore),
+      reasoning: typeof aiMatch.reasoning === 'string' ? aiMatch.reasoning.trim() : '',
+    };
+  }).filter(Boolean);
 };
 
 
@@ -310,6 +440,40 @@ app.post('/api/extract-resume/text', async (req, res) => {
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', aiConfigured: !!process.env.GEMINI_API_KEY });
+});
+
+app.post('/api/job-matches/ai', async (req, res) => {
+  try {
+    const { profile, jobs } = req.body || {};
+    if (!profile || typeof profile !== 'object') {
+      return res.status(400).json({
+        error: 'Invalid input',
+        message: 'Profile is required.',
+      });
+    }
+
+    if (!Array.isArray(jobs) || jobs.length === 0) {
+      return res.status(400).json({
+        error: 'Invalid input',
+        message: 'A non-empty jobs array is required.',
+      });
+    }
+
+    const aiResponse = await matchJobsWithAI(profile, jobs);
+    const matches = sanitizeAiJobMatches(jobs, aiResponse);
+
+    if (!matches.length) {
+      throw new Error('AI job matching returned no usable matches');
+    }
+
+    res.json({ source: 'ai', matches });
+  } catch (err) {
+    console.warn('AI job match failed:', err.message);
+    res.status(500).json({
+      error: 'AI job match failed',
+      message: err.message || 'Unable to compute AI-based job matches.',
+    });
+  }
 });
 
 app.listen(PORT, () => {

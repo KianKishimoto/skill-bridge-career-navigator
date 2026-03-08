@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { matchJobsToProfile } from './jobMatching';
+import { matchJobsToProfile, mergeAiJobMatchScores } from './jobMatching';
 
 const mockJobs = [
   {
@@ -74,5 +74,35 @@ describe('matchJobsToProfile', () => {
     const result = matchJobsToProfile(null, mockJobs);
     expect(result).toHaveLength(2);
     expect(result[0].matchScore).toBe(0);
+  });
+});
+
+describe('mergeAiJobMatchScores', () => {
+  it('overrides fallback scores when AI scores are available and keeps fallback for missing jobs', () => {
+    const baseMatches = [
+      { id: 'j1', matchScore: 60 },
+      { id: 'j2', matchScore: 40 },
+    ];
+    const aiMatches = [
+      {
+        jobId: 'j2',
+        matchScore: 88,
+        experienceScore: 90,
+        skillsScore: 85,
+        roleAlignmentScore: 89,
+        reasoning: 'Strong relevant delivery experience.',
+      },
+    ];
+
+    const merged = mergeAiJobMatchScores(baseMatches, aiMatches);
+
+    expect(merged[0].id).toBe('j2');
+    expect(merged[0].matchScore).toBe(88);
+    expect(merged[0].matchSource).toBe('ai');
+    expect(merged[0].aiInsights.experienceScore).toBe(90);
+
+    const fallbackJob = merged.find((job) => job.id === 'j1');
+    expect(fallbackJob.matchSource).toBe('fallback');
+    expect(fallbackJob.matchScore).toBe(60);
   });
 });

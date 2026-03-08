@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react';
-import { matchJobsToProfile } from '../services/jobMatching';
+import { useEffect, useState, useMemo } from 'react';
+import { getAiJobMatches } from '../services/api';
+import { matchJobsToProfile, mergeAiJobMatchScores } from '../services/jobMatching';
 
 const renderList = (items) => {
   if (!items?.length) return null;
@@ -14,6 +15,7 @@ const renderList = (items) => {
 
 export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
   const [expandedId, setExpandedId] = useState(null);
+  const [aiResult, setAiResult] = useState({ key: '', matches: [] });
 
   const getDescriptionPreview = (description = '') => {
     const trimmedDescription = description.trim();
@@ -24,8 +26,36 @@ export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
     return `${trimmedDescription.slice(0, 180)}...`;
   };
 
+  const baseMatches = useMemo(() => matchJobsToProfile(profile || {}, jobs || []), [profile, jobs]);
+  const profileKey = useMemo(() => JSON.stringify({ profile: profile || {}, jobs: jobs || [] }), [profile, jobs]);
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    if (!profile || !(jobs || []).length) {
+      return () => {
+        isCancelled = true;
+      };
+    }
+
+    getAiJobMatches(profile, jobs)
+      .then((result) => {
+        if (!isCancelled) {
+          setAiResult({ key: profileKey, matches: result.matches || [] });
+        }
+      })
+      .catch(() => {
+        // Keep fallback-only matches when AI is unavailable.
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [profile, jobs, profileKey]);
+
   const filteredAndMatched = useMemo(() => {
-    let result = matchJobsToProfile(profile || {}, jobs || []);
+    const scopedAiMatches = aiResult.key === profileKey ? aiResult.matches : [];
+    let result = mergeAiJobMatchScores(baseMatches, scopedAiMatches);
 
     if (searchTerm?.trim()) {
       const term = searchTerm.toLowerCase();
@@ -43,7 +73,7 @@ export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
     }
 
     return result;
-  }, [profile, jobs, searchTerm, roleFilter]);
+  }, [baseMatches, aiResult, profileKey, searchTerm, roleFilter]);
 
   if (!profile) {
     return (
@@ -89,7 +119,19 @@ export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
                   <div><strong>Required experience:</strong> {job.requiredExperience || 'Not listed'}</div>
                   <div><strong>Team:</strong> {job.team || 'Not listed'}</div>
                   <div><strong>Posted date:</strong> {job.postedDate || 'Not listed'}</div>
+                  <div><strong>Match source:</strong> {job.matchSource === 'ai' ? 'AI (holistic)' : 'Fallback (skills-based)'}</div>
                 </div>
+                {job.aiInsights && (
+                  <div>
+                    <strong>AI fit breakdown:</strong>
+                    <ul className="job-details-list">
+                      <li>Experience fit: {job.aiInsights.experienceScore}%</li>
+                      <li>Skills fit: {job.aiInsights.skillsScore}%</li>
+                      <li>Role alignment: {job.aiInsights.roleAlignmentScore}%</li>
+                    </ul>
+                    {job.aiInsights.reasoning && <p>{job.aiInsights.reasoning}</p>}
+                  </div>
+                )}
                 <div>
                   <strong>Required skills:</strong>
                   {renderList(job.requiredSkills)}
