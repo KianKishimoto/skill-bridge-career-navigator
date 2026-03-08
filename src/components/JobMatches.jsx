@@ -4,6 +4,15 @@ import { matchJobsToProfile } from '../services/jobMatching';
 export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
   const [expandedId, setExpandedId] = useState(null);
 
+  const getDescriptionPreview = (description = '') => {
+    const trimmedDescription = description.trim();
+    if (trimmedDescription.length <= 180) {
+      return trimmedDescription;
+    }
+
+    return `${trimmedDescription.slice(0, 180)}...`;
+  };
+
   const filteredAndMatched = useMemo(() => {
     let result = matchJobsToProfile(profile || {}, jobs || []);
 
@@ -56,9 +65,13 @@ export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
                 {job.matchScore}% match
               </span>
             </div>
-            <p className="job-desc">{job.description}</p>
+            <p className="job-desc">{getDescriptionPreview(job.description)}</p>
             {expandedId === job.id && (
               <div className="job-details">
+                <div>
+                  <strong>Full description:</strong>
+                  <p className="job-full-desc">{job.description}</p>
+                </div>
                 <div>
                   <strong>Required:</strong>{' '}
                   {(job.requiredSkills || []).join(', ')}
