@@ -45,3 +45,35 @@ export function matchJobsToProfile(profile, jobs) {
     };
   }).sort((a, b) => b.matchScore - a.matchScore);
 }
+
+export function mergeAiJobMatchScores(baseMatches, aiMatches) {
+  if (!Array.isArray(baseMatches) || !Array.isArray(aiMatches) || !aiMatches.length) {
+    return baseMatches || [];
+  }
+
+  const aiByJobId = new Map(aiMatches.map((match) => [String(match.jobId), match]));
+
+  return baseMatches
+    .map((job) => {
+      const ai = aiByJobId.get(String(job.id));
+      if (!ai) {
+        return {
+          ...job,
+          matchSource: 'fallback',
+        };
+      }
+
+      return {
+        ...job,
+        matchScore: ai.matchScore,
+        aiInsights: {
+          experienceScore: ai.experienceScore,
+          skillsScore: ai.skillsScore,
+          roleAlignmentScore: ai.roleAlignmentScore,
+          reasoning: ai.reasoning,
+        },
+        matchSource: 'ai',
+      };
+    })
+    .sort((a, b) => b.matchScore - a.matchScore);
+}
