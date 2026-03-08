@@ -4,7 +4,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import pdf from 'pdf-parse';
+import { PDFParse } from 'pdf-parse';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
