@@ -54,7 +54,7 @@ describe('matchJobsToProfile', () => {
 
     const result = matchJobsToProfile(profile, jobs);
 
-    expect(result[0].matchScore).toBe(70);
+    expect(result[0].matchScore).toBe(100);
     expect(result[0].matchedSkills).toBe(3);
     expect(result[0].preferredMatchedSkills).toBe(0);
     expect(result[0].matchedCertifications).toBe(0);

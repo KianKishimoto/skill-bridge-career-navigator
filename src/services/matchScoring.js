@@ -2,17 +2,21 @@ function normalizeText(value) {
   return (value || '').toString().trim().toLowerCase();
 }
 
+function normalizeNonEmpty(values = []) {
+  return values.map((value) => normalizeText(value)).filter(Boolean);
+}
+
 function hasCertMatch(requiredCert, userCerts) {
   return [...userCerts].some((userCert) => requiredCert.includes(userCert) || userCert.includes(requiredCert));
 }
 
 export function calculateMatchScore(profile = {}, target = {}) {
-  const userSkills = new Set((profile.skills || []).map((s) => normalizeText(s)));
-  const userCerts = new Set((profile.certifications || []).map((c) => normalizeText(c)));
+  const userSkills = new Set(normalizeNonEmpty(profile.skills || []));
+  const userCerts = new Set(normalizeNonEmpty(profile.certifications || []));
 
-  const requiredSkills = (target.requiredSkills || []).map((s) => normalizeText(s));
-  const preferredSkills = (target.preferredSkills || []).map((s) => normalizeText(s));
-  const requiredCerts = (target.certifications || []).map((c) => normalizeText(c));
+  const requiredSkills = normalizeNonEmpty(target.requiredSkills || []);
+  const preferredSkills = normalizeNonEmpty(target.preferredSkills || []);
+  const requiredCerts = normalizeNonEmpty(target.certifications || []);
 
   const matchedRequired = requiredSkills.filter((s) => userSkills.has(s));
   const matchedPreferred = preferredSkills.filter((s) => userSkills.has(s));
