@@ -19,3 +19,5 @@ Tradeoffs & Prioritization:
 ● What did you cut to stay within the 4–6 hour limit? Separating the content into multiple tabs, cover letter/resume review/improvement, persistent data, more filter options (eg. location, salary)
 ● What would you build next if you had more time? Probably the cover letter/resume review. I would also refine the user experience and add more flow to the program before doing anything else.
 ● Known limitations: Since we were only supposed to use synthetic data the program is unable to actually scrape the web for data, also if the resume is weirdly formatted or is for some reason just an image in pdf form the parser will have a hard time. 
+
+Youtube Demo Link: https://youtu.be/2BaenQkWIoE
