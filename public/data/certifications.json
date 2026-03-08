@@ -1,0 +1,83 @@
+[
+  {
+    "id": "cert-1",
+    "name": "AWS Certified Solutions Architect - Associate",
+    "provider": "AWS",
+    "skillsCovered": ["AWS", "Cloud Architecture", "Networking", "Security"],
+    "timeToComplete": "2-3 months",
+    "cost": "Paid (~$150)",
+    "relevanceRoles": ["Cloud Engineer", "DevOps Engineer", "Solutions Architect"]
+  },
+  {
+    "id": "cert-2",
+    "name": "AWS Certified Developer - Associate",
+    "provider": "AWS",
+    "skillsCovered": ["AWS", "Lambda", "DynamoDB", "API Gateway"],
+    "timeToComplete": "2-3 months",
+    "cost": "Paid (~$150)",
+    "relevanceRoles": ["Cloud Engineer", "Backend Engineer", "Full Stack Developer"]
+  },
+  {
+    "id": "cert-3",
+    "name": "Certified Kubernetes Administrator (CKA)",
+    "provider": "CNCF",
+    "skillsCovered": ["Kubernetes", "Containers", "Orchestration"],
+    "timeToComplete": "1-2 months",
+    "cost": "Paid (~$395)",
+    "relevanceRoles": ["Cloud Engineer", "DevOps Engineer"]
+  },
+  {
+    "id": "cert-4",
+    "name": "HashiCorp Certified: Terraform Associate",
+    "provider": "HashiCorp",
+    "skillsCovered": ["Terraform", "IaC", "Cloud Provisioning"],
+    "timeToComplete": "1-2 months",
+    "cost": "Paid (~$70)",
+    "relevanceRoles": ["Cloud Engineer", "DevOps Engineer"]
+  },
+  {
+    "id": "cert-5",
+    "name": "AWS Cloud Practitioner",
+    "provider": "AWS",
+    "skillsCovered": ["AWS Basics", "Cloud Concepts"],
+    "timeToComplete": "2-4 weeks",
+    "cost": "Paid (~$100)",
+    "relevanceRoles": ["Cloud Engineer", "Junior Cloud Engineer"]
+  },
+  {
+    "id": "cert-6",
+    "name": "AWS Certified DevOps Engineer - Professional",
+    "provider": "AWS",
+    "skillsCovered": ["CI/CD", "Monitoring", "Automation", "AWS"],
+    "timeToComplete": "3-4 months",
+    "cost": "Paid (~$300)",
+    "relevanceRoles": ["DevOps Engineer", "Cloud Engineer"]
+  },
+  {
+    "id": "cert-7",
+    "name": "Databricks Certified Data Engineer",
+    "provider": "Databricks",
+    "skillsCovered": ["Spark", "Data Engineering", "Delta Lake"],
+    "timeToComplete": "2-3 months",
+    "cost": "Paid (~$200)",
+    "relevanceRoles": ["Data Engineer"]
+  },
+  {
+    "id": "cert-8",
+    "name": "CISSP",
+    "provider": "ISC2",
+    "skillsCovered": ["Security", "Risk Management", "Compliance"],
+    "timeToComplete": "4-6 months",
+    "cost": "Paid (~$749)",
+    "relevanceRoles": ["Security Engineer"]
+  },
+  {
+    "id": "cert-9",
+    "name": "AWS Security Specialty",
+    "provider": "AWS",
+    "skillsCovered": ["AWS Security", "Compliance", "Encryption"],
+    "timeToComplete": "2-3 months",
+    "cost": "Paid (~$300)",
+    "relevanceRoles": ["Security Engineer", "Cloud Engineer"]
+  }
+]

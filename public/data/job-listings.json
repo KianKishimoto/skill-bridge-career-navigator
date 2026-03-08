@@ -1,0 +1,90 @@
+[
+  {
+    "id": "job-1",
+    "title": "Cloud Engineer",
+    "company": "TechCorp Solutions",
+    "location": "Remote",
+    "requiredSkills": ["AWS", "Kubernetes", "Terraform", "Python", "Docker", "CI/CD"],
+    "preferredSkills": ["GCP", "Azure", "Linux", "Networking"],
+    "requiredExperience": "2+ years",
+    "certifications": ["AWS Certified Solutions Architect", "AWS Certified Developer"],
+    "description": "Design and implement cloud infrastructure solutions."
+  },
+  {
+    "id": "job-2",
+    "title": "Senior Cloud Engineer",
+    "company": "CloudFirst Inc",
+    "location": "San Francisco, CA",
+    "requiredSkills": ["AWS", "Kubernetes", "Terraform", "Python", "Docker", "CI/CD", "Linux"],
+    "preferredSkills": ["GCP", "Azure", "Prometheus", "Grafana"],
+    "requiredExperience": "5+ years",
+    "certifications": ["AWS Certified Solutions Architect", "CKA", "Terraform Associate"],
+    "description": "Lead cloud architecture and mentor junior engineers."
+  },
+  {
+    "id": "job-3",
+    "title": "DevOps Engineer",
+    "company": "StartupXYZ",
+    "location": "Austin, TX",
+    "requiredSkills": ["Docker", "Kubernetes", "Jenkins", "Python", "Bash", "Linux"],
+    "preferredSkills": ["AWS", "Terraform", "Ansible", "Prometheus"],
+    "requiredExperience": "3+ years",
+    "certifications": ["CKA", "AWS Certified DevOps Engineer"],
+    "description": "Build and maintain CI/CD pipelines and infrastructure."
+  },
+  {
+    "id": "job-4",
+    "title": "Data Engineer",
+    "company": "DataFlow Analytics",
+    "location": "New York, NY",
+    "requiredSkills": ["Python", "SQL", "Spark", "Airflow", "Data Warehousing"],
+    "preferredSkills": ["AWS", "Snowflake", "dbt", "Kafka"],
+    "requiredExperience": "3+ years",
+    "certifications": ["AWS Certified Data Analytics", "Databricks Certified"],
+    "description": "Design data pipelines and warehouse solutions."
+  },
+  {
+    "id": "job-5",
+    "title": "Full Stack Developer",
+    "company": "WebScale Co",
+    "location": "Remote",
+    "requiredSkills": ["JavaScript", "React", "Node.js", "PostgreSQL", "REST APIs"],
+    "preferredSkills": ["TypeScript", "AWS", "Docker", "GraphQL"],
+    "requiredExperience": "2+ years",
+    "certifications": [],
+    "description": "Build scalable web applications end-to-end."
+  },
+  {
+    "id": "job-6",
+    "title": "Security Engineer",
+    "company": "SecureNet Systems",
+    "location": "Seattle, WA",
+    "requiredSkills": ["Security", "Python", "Linux", "SIEM", "Networking"],
+    "preferredSkills": ["AWS", "Kubernetes", "Compliance", "Penetration Testing"],
+    "requiredExperience": "4+ years",
+    "certifications": ["CISSP", "AWS Security Specialty", "CEH"],
+    "description": "Implement security controls and monitor infrastructure."
+  },
+  {
+    "id": "job-7",
+    "title": "Backend Engineer",
+    "company": "API Masters",
+    "location": "Denver, CO",
+    "requiredSkills": ["Python", "Java", "PostgreSQL", "REST APIs", "Microservices"],
+    "preferredSkills": ["Kafka", "Redis", "Docker", "Kubernetes"],
+    "requiredExperience": "3+ years",
+    "certifications": [],
+    "description": "Design and build high-performance backend services."
+  },
+  {
+    "id": "job-8",
+    "title": "Junior Cloud Engineer",
+    "company": "CloudStart",
+    "location": "Remote",
+    "requiredSkills": ["AWS", "Python", "Linux", "Docker"],
+    "preferredSkills": ["Terraform", "Kubernetes", "CI/CD"],
+    "requiredExperience": "0-2 years",
+    "certifications": ["AWS Cloud Practitioner"],
+    "description": "Entry-level cloud infrastructure role with growth potential."
+  }
+]
