@@ -1,18 +1,24 @@
+const normalizeStringArray = (items) => (
+  (Array.isArray(items) ? items : [])
+    .map((item) => (item ?? '').toString().trim())
+    .filter(Boolean)
+);
+
 export function matchJobsToProfile(profile, jobs) {
   const safeProfile = profile || {};
 
   const userSkills = new Set(
-    (safeProfile.skills || []).map((s) => s.toLowerCase?.() || String(s).toLowerCase())
+    normalizeStringArray(safeProfile.skills).map((s) => s.toLowerCase())
   );
   const userCerts = new Set(
-    (safeProfile.certifications || []).map((c) => c.toLowerCase?.() || String(c).toLowerCase())
+    normalizeStringArray(safeProfile.certifications).map((c) => c.toLowerCase())
   );
 
   return (jobs || []).map((job) => {
-    const requiredSkills = job.requiredSkills || [];
+    const requiredSkills = normalizeStringArray(job?.requiredSkills);
     const required = requiredSkills.map((s) => s.toLowerCase());
-    const preferred = (job.preferredSkills || []).map((s) => s.toLowerCase());
-    const jobCerts = (job.certifications || []).map((c) => c.toLowerCase());
+    const preferred = normalizeStringArray(job?.preferredSkills).map((s) => s.toLowerCase());
+    const jobCerts = normalizeStringArray(job?.certifications).map((c) => c.toLowerCase());
 
     const requiredMatch = required.filter((s) => userSkills.has(s)).length;
     const preferredMatch = preferred.filter((s) => userSkills.has(s)).length;
