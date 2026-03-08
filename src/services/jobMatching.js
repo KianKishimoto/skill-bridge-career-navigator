@@ -1,12 +1,25 @@
 import { calculateMatchScore } from './matchScoring';
 
+function normalizeText(value) {
+  return (value || '').toString().trim().toLowerCase();
+}
+
 export function matchJobsToProfile(profile, jobs) {
   return (jobs || []).map((job) => {
     const score = calculateMatchScore(profile || {}, job);
 
-    const missingSkills = (job.requiredSkills || []).filter(
-      (skill) => !score.matchedRequired.includes(skill.toLowerCase())
-    );
+    const missingSkills = (job.requiredSkills || []).reduce((missing, skill) => {
+      const normalizedSkill = normalizeText(skill);
+      if (!normalizedSkill) {
+        return missing;
+      }
+
+      if (!score.matchedRequired.includes(normalizedSkill)) {
+        missing.push(skill?.toString?.().trim?.() || normalizedSkill);
+      }
+
+      return missing;
+    }, []);
     const missingCerts = score.requiredCerts.filter(
       (requiredCert) => !score.matchedCerts.includes(requiredCert)
     );
