@@ -1,45 +1,25 @@
+import { calculateMatchScore } from './matchScoring';
+
 export function matchJobsToProfile(profile, jobs) {
-  const safeProfile = profile || {};
-
-  const userSkills = new Set(
-    (safeProfile.skills || []).map((s) => s.toLowerCase?.() || String(s).toLowerCase())
-  );
-  const userCerts = new Set(
-    (safeProfile.certifications || []).map((c) => c.toLowerCase?.() || String(c).toLowerCase())
-  );
-
   return (jobs || []).map((job) => {
-    const requiredSkills = job.requiredSkills || [];
-    const required = requiredSkills.map((s) => s.toLowerCase());
-    const preferred = (job.preferredSkills || []).map((s) => s.toLowerCase());
-    const jobCerts = (job.certifications || []).map((c) => c.toLowerCase());
+    const score = calculateMatchScore(profile || {}, job);
 
-    const requiredMatch = required.filter((s) => userSkills.has(s)).length;
-    const preferredMatch = preferred.filter((s) => userSkills.has(s)).length;
-    const certMatch = jobCerts.filter((c) =>
-      [...userCerts].some((uc) => c.includes(uc) || uc.includes(c))
-    ).length;
-
-    const requiredTotal = required.length || 1;
-    // Keep Job Matches % aligned with Role Pivot's required-skills match percentage.
-    const matchScore = (requiredMatch / requiredTotal) * 100;
-
-    const missingSkills = requiredSkills.filter(
-      (skill) => !userSkills.has(skill.toLowerCase())
+    const missingSkills = (job.requiredSkills || []).filter(
+      (skill) => !score.matchedRequired.includes(skill.toLowerCase())
     );
-    const missingCerts = jobCerts.filter(
-      (c) => ![...userCerts].some((uc) => c.includes(uc) || uc.includes(c))
+    const missingCerts = score.requiredCerts.filter(
+      (requiredCert) => !score.matchedCerts.includes(requiredCert)
     );
 
     return {
       ...job,
-      matchScore: Math.round(matchScore),
-      matchedSkills: requiredMatch,
-      totalRequired: required.length,
-      preferredMatchedSkills: preferredMatch,
-      totalPreferred: preferred.length,
-      matchedCertifications: certMatch,
-      totalCertifications: jobCerts.length,
+      matchScore: score.matchScore,
+      matchedSkills: score.matchedRequired.length,
+      totalRequired: score.requiredSkills.length,
+      preferredMatchedSkills: score.matchedPreferred.length,
+      totalPreferred: score.preferredSkills.length,
+      matchedCertifications: score.matchedCerts.length,
+      totalCertifications: score.requiredCerts.length,
       missingSkills,
       missingCerts,
     };
@@ -65,7 +45,7 @@ export function mergeAiJobMatchScores(baseMatches, aiMatches) {
 
       return {
         ...job,
-        matchScore: ai.matchScore,
+        aiMatchScore: ai.matchScore,
         aiInsights: {
           experienceScore: ai.experienceScore,
           skillsScore: ai.skillsScore,
