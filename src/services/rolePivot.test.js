@@ -66,6 +66,42 @@ describe('rolePivot services', () => {
     const analysis = analyzeRolePivot(profile, jobs[0]);
 
     expect(analysis.targetRole).toBe('Data Engineer I');
-    expect(analysis.matchPercent).toBe(67);
+    expect(analysis.matchPercent).toBe(57);
+  });
+
+  it('ignores blank certification entries in profile matching', () => {
+    const analysis = analyzeRolePivot(
+      {
+        skills: ['Python', 'SQL'],
+        certifications: [null, '   '],
+      },
+      jobs[1]
+    );
+
+    expect(analysis.missingCertifications).toContain('databricks certified');
+  });
+
+  it('ignores blank certifications when aggregating general role requirements', () => {
+    const analysis = analyzeGeneralRolePivot(
+      {
+        skills: ['Python', 'SQL'],
+        certifications: [undefined, ''],
+      },
+      [
+        ...jobs,
+        {
+          id: 'job-4',
+          title: 'Data Engineer III',
+          company: 'D',
+          requiredSkills: ['Python'],
+          preferredSkills: [],
+          certifications: ['   '],
+        },
+      ],
+      'data engineer'
+    );
+
+    expect(analysis.missingCertifications).toContain('databricks certified');
+    expect(analysis.missingCertifications).not.toContain('');
   });
 });
