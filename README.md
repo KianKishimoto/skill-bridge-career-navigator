@@ -24,9 +24,10 @@ AI Disclosure:
 ● How did you verify the suggestions? Manual review of changes in pull requests
 
 ● Give one example of a suggestion you rejected or changed: Code was importing a nonexistent class from a module so I went in and fixed it 
+
 Tradeoffs & Prioritization:
 
-● What did you cut to stay within the 4–6 hour limit? Separating the content into multiple tabs, cover letter/resume review/improvement, persistent data, more filter options (eg. location, salary)
+● What did you cut to stay within the 4–6 hour limit? Separating the content into multiple tabs, cover letter/resume review/improvement, persistent data, more filter options (eg. location, salary), AI job matching percentages
 
 ● What would you build next if you had more time? Probably the cover letter/resume review. I would also refine the user experience and add more flow to the program before doing anything else.
 
