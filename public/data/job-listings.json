@@ -1,90 +1,870 @@
 [
   {
     "id": "job-1",
-    "title": "Cloud Engineer",
+    "title": "Cloud Engineer I",
     "company": "TechCorp Solutions",
-    "location": "Remote",
-    "requiredSkills": ["AWS", "Kubernetes", "Terraform", "Python", "Docker", "CI/CD"],
-    "preferredSkills": ["GCP", "Azure", "Linux", "Networking"],
-    "requiredExperience": "2+ years",
-    "certifications": ["AWS Certified Solutions Architect", "AWS Certified Developer"],
-    "description": "Design and implement cloud infrastructure solutions."
+    "location": "Remote (US)",
+    "requiredSkills": [
+      "AWS",
+      "Docker",
+      "Python",
+      "Linux",
+      "CI/CD"
+    ],
+    "preferredSkills": [
+      "Terraform",
+      "Kubernetes",
+      "CloudWatch",
+      "Networking"
+    ],
+    "requiredExperience": "1-3 years",
+    "certifications": [
+      "AWS Cloud Practitioner"
+    ],
+    "salaryEstimate": "$92,000 - $118,000",
+    "employmentType": "Full-time",
+    "team": "Platform Engineering",
+    "postedDate": "2026-02-20",
+    "description": "TechCorp Solutions is hiring a Cloud Engineer I to help us scale internal platform services used by product teams across multiple business units. This role is ideal for an early-career engineer who has already worked with AWS in production and wants to deepen their expertise in cloud operations, infrastructure automation, and service reliability. You will partner with senior engineers to maintain deployment pipelines, improve cloud cost visibility, and support migration efforts from legacy VM-based workloads to containerized services. Success in this role means strong ownership, clear communication, and a practical mindset for balancing reliability with delivery speed.",
+    "responsibilities": [
+      "Support daily operations for AWS-based services including incident triage and post-incident follow-up.",
+      "Implement infrastructure changes through pull requests and collaborate on peer reviews.",
+      "Maintain CI/CD workflows and improve deployment safety checks.",
+      "Contribute to internal runbooks and architecture documentation.",
+      "Assist with cost-optimization initiatives and resource-rightsizing projects."
+    ],
+    "minimumQualifications": [
+      "Hands-on experience with AWS core services (EC2, S3, IAM, VPC).",
+      "Experience writing scripts in Python or Bash.",
+      "Comfortable working in Linux environments and troubleshooting service issues.",
+      "Understanding of Git workflows and CI/CD fundamentals."
+    ],
+    "preferredQualifications": [
+      "Exposure to Terraform or CloudFormation.",
+      "Basic understanding of Kubernetes concepts.",
+      "Experience with observability tools such as CloudWatch, Grafana, or Datadog."
+    ],
+    "benefits": [
+      "Medical, dental, vision",
+      "401(k) with company match",
+      "Home office stipend",
+      "Professional development budget"
+    ]
   },
   {
     "id": "job-2",
-    "title": "Senior Cloud Engineer",
-    "company": "CloudFirst Inc",
-    "location": "San Francisco, CA",
-    "requiredSkills": ["AWS", "Kubernetes", "Terraform", "Python", "Docker", "CI/CD", "Linux"],
-    "preferredSkills": ["GCP", "Azure", "Prometheus", "Grafana"],
-    "requiredExperience": "5+ years",
-    "certifications": ["AWS Certified Solutions Architect", "CKA", "Terraform Associate"],
-    "description": "Lead cloud architecture and mentor junior engineers."
+    "title": "Cloud Engineer II",
+    "company": "TechCorp Solutions",
+    "location": "Austin, TX (Hybrid)",
+    "requiredSkills": [
+      "AWS",
+      "Terraform",
+      "Kubernetes",
+      "Python",
+      "CI/CD",
+      "Linux"
+    ],
+    "preferredSkills": [
+      "Prometheus",
+      "Grafana",
+      "EKS",
+      "FinOps"
+    ],
+    "requiredExperience": "3-5 years",
+    "certifications": [
+      "AWS Certified Solutions Architect",
+      "Terraform Associate"
+    ],
+    "salaryEstimate": "$122,000 - $152,000",
+    "employmentType": "Full-time",
+    "team": "Platform Engineering",
+    "postedDate": "2026-02-24",
+    "description": "As a Cloud Engineer II, you will own end-to-end delivery of cloud infrastructure patterns that power dozens of engineering squads. You will shape standards for infrastructure-as-code, security controls, and deployment architecture while mentoring less experienced teammates. This role includes meaningful design responsibility and close partnership with security, developer productivity, and application teams.",
+    "responsibilities": [
+      "Design and implement reusable Terraform modules for common infrastructure patterns.",
+      "Improve Kubernetes cluster reliability and scaling behavior.",
+      "Lead root-cause analysis for production incidents and drive corrective actions.",
+      "Define guardrails for secure cloud deployments in partnership with security engineering.",
+      "Coach engineers on observability best practices and SLO management."
+    ],
+    "minimumQualifications": [
+      "Production experience with AWS and Kubernetes-based workloads.",
+      "Strong Terraform skills and infrastructure code review experience.",
+      "Experience building and maintaining CI/CD pipelines.",
+      "Demonstrated ability to troubleshoot distributed systems issues."
+    ],
+    "preferredQualifications": [
+      "EKS operations experience.",
+      "Knowledge of cost optimization and cloud governance frameworks.",
+      "Experience mentoring junior cloud or DevOps engineers."
+    ],
+    "benefits": [
+      "Medical, dental, vision",
+      "Annual bonus",
+      "RSU package",
+      "Paid certification exams"
+    ]
   },
   {
     "id": "job-3",
-    "title": "DevOps Engineer",
-    "company": "StartupXYZ",
-    "location": "Austin, TX",
-    "requiredSkills": ["Docker", "Kubernetes", "Jenkins", "Python", "Bash", "Linux"],
-    "preferredSkills": ["AWS", "Terraform", "Ansible", "Prometheus"],
-    "requiredExperience": "3+ years",
-    "certifications": ["CKA", "AWS Certified DevOps Engineer"],
-    "description": "Build and maintain CI/CD pipelines and infrastructure."
+    "title": "Senior Cloud Engineer",
+    "company": "CloudFirst Inc",
+    "location": "San Francisco, CA",
+    "requiredSkills": [
+      "AWS",
+      "Kubernetes",
+      "Terraform",
+      "Python",
+      "Docker",
+      "Linux",
+      "CI/CD"
+    ],
+    "preferredSkills": [
+      "GCP",
+      "Azure",
+      "Service Mesh",
+      "Security"
+    ],
+    "requiredExperience": "6+ years",
+    "certifications": [
+      "AWS Certified Solutions Architect",
+      "CKA"
+    ],
+    "salaryEstimate": "$168,000 - $205,000",
+    "employmentType": "Full-time",
+    "team": "Cloud Infrastructure",
+    "postedDate": "2026-02-15",
+    "description": "CloudFirst is seeking a Senior Cloud Engineer to lead architecture modernization across our customer-facing SaaS platform. You will drive high-impact initiatives around multi-region resiliency, deployment automation, and service performance optimization. The ideal candidate has a strong systems perspective, can evaluate tradeoffs quickly, and is comfortable influencing architecture decisions across multiple teams.",
+    "responsibilities": [
+      "Lead architecture reviews for platform-level cloud initiatives.",
+      "Define infrastructure standards and enforce best practices through tooling and policy.",
+      "Partner with application teams to improve reliability and deployment velocity.",
+      "Design and execute disaster recovery and resilience testing plans.",
+      "Mentor senior and mid-level engineers on cloud engineering practices."
+    ],
+    "minimumQualifications": [
+      "Extensive hands-on experience with AWS in production.",
+      "Deep Terraform and Kubernetes operational expertise.",
+      "Strong experience with incident management and operational excellence.",
+      "Proven ability to lead cross-functional technical projects."
+    ],
+    "preferredQualifications": [
+      "Experience in multi-cloud environments.",
+      "Background in security/compliance-heavy workloads.",
+      "Public speaking or technical writing contributions."
+    ],
+    "benefits": [
+      "Comprehensive health plans",
+      "401(k) match",
+      "Generous parental leave",
+      "Equity"
+    ]
   },
   {
     "id": "job-4",
-    "title": "Data Engineer",
-    "company": "DataFlow Analytics",
-    "location": "New York, NY",
-    "requiredSkills": ["Python", "SQL", "Spark", "Airflow", "Data Warehousing"],
-    "preferredSkills": ["AWS", "Snowflake", "dbt", "Kafka"],
+    "title": "DevOps Engineer",
+    "company": "StartupXYZ",
+    "location": "Austin, TX",
+    "requiredSkills": [
+      "Docker",
+      "Kubernetes",
+      "Jenkins",
+      "Python",
+      "Bash",
+      "Linux"
+    ],
+    "preferredSkills": [
+      "AWS",
+      "Terraform",
+      "ArgoCD",
+      "Prometheus"
+    ],
     "requiredExperience": "3+ years",
-    "certifications": ["AWS Certified Data Analytics", "Databricks Certified"],
-    "description": "Design data pipelines and warehouse solutions."
+    "certifications": [
+      "CKA",
+      "AWS Certified DevOps Engineer"
+    ],
+    "salaryEstimate": "$128,000 - $158,000",
+    "employmentType": "Full-time",
+    "team": "Developer Platform",
+    "postedDate": "2026-02-27",
+    "description": "StartupXYZ is growing quickly and needs a DevOps Engineer who thrives in fast-moving product environments. You will own CI/CD pipeline quality, deployment observability, and core operational tooling for engineering teams shipping features daily. This role suits someone who combines automation-first thinking with practical incident response experience.",
+    "responsibilities": [
+      "Maintain and optimize CI/CD pipelines",
+      "Improve release reliability and rollback strategies",
+      "Own deployment observability and alert tuning",
+      "Create internal platform tooling for developers"
+    ],
+    "minimumQualifications": [
+      "3+ years in DevOps/SRE",
+      "Strong Linux and scripting skills",
+      "Experience with containerized deployment workflows"
+    ],
+    "preferredQualifications": [
+      "GitOps familiarity",
+      "Experience with startup-scale operations"
+    ],
+    "benefits": [
+      "Health benefits",
+      "Flexible PTO",
+      "Remote-friendly policy"
+    ]
   },
   {
     "id": "job-5",
-    "title": "Full Stack Developer",
-    "company": "WebScale Co",
-    "location": "Remote",
-    "requiredSkills": ["JavaScript", "React", "Node.js", "PostgreSQL", "REST APIs"],
-    "preferredSkills": ["TypeScript", "AWS", "Docker", "GraphQL"],
-    "requiredExperience": "2+ years",
-    "certifications": [],
-    "description": "Build scalable web applications end-to-end."
+    "title": "Data Engineer",
+    "company": "DataFlow Analytics",
+    "location": "New York, NY",
+    "requiredSkills": [
+      "Python",
+      "SQL",
+      "Spark",
+      "Airflow",
+      "Data Warehousing"
+    ],
+    "preferredSkills": [
+      "AWS",
+      "Snowflake",
+      "dbt",
+      "Kafka"
+    ],
+    "requiredExperience": "3+ years",
+    "certifications": [
+      "Databricks Certified",
+      "AWS Certified Data Analytics"
+    ],
+    "salaryEstimate": "$132,000 - $168,000",
+    "employmentType": "Full-time",
+    "team": "Data Platform",
+    "postedDate": "2026-02-18",
+    "description": "DataFlow Analytics is hiring a Data Engineer to build reliable, production-grade data pipelines supporting analytics and machine learning teams. You will design ingestion architecture, enforce data quality standards, and partner with stakeholders to model datasets for high-impact reporting and experimentation use cases.",
+    "responsibilities": [
+      "Build scalable ETL/ELT pipelines",
+      "Implement data quality checks and lineage tracking",
+      "Optimize warehouse models for performance and cost",
+      "Collaborate with analytics and ML teams"
+    ],
+    "minimumQualifications": [
+      "Strong Python and SQL proficiency",
+      "Experience with Airflow or equivalent orchestrator",
+      "Production Spark or distributed data processing experience"
+    ],
+    "preferredQualifications": [
+      "Snowflake or BigQuery experience",
+      "dbt modeling experience",
+      "Streaming data pipeline exposure"
+    ],
+    "benefits": [
+      "Health coverage",
+      "401(k)",
+      "Education stipend",
+      "Bonus"
+    ]
   },
   {
     "id": "job-6",
-    "title": "Security Engineer",
-    "company": "SecureNet Systems",
-    "location": "Seattle, WA",
-    "requiredSkills": ["Security", "Python", "Linux", "SIEM", "Networking"],
-    "preferredSkills": ["AWS", "Kubernetes", "Compliance", "Penetration Testing"],
-    "requiredExperience": "4+ years",
-    "certifications": ["CISSP", "AWS Security Specialty", "CEH"],
-    "description": "Implement security controls and monitor infrastructure."
+    "title": "Senior Data Engineer",
+    "company": "DataFlow Analytics",
+    "location": "Remote (US)",
+    "requiredSkills": [
+      "Python",
+      "SQL",
+      "Spark",
+      "Airflow",
+      "Kafka",
+      "Data Modeling"
+    ],
+    "preferredSkills": [
+      "Snowflake",
+      "dbt",
+      "Terraform",
+      "AWS"
+    ],
+    "requiredExperience": "5+ years",
+    "certifications": [
+      "Databricks Certified Data Engineer"
+    ],
+    "salaryEstimate": "$162,000 - $198,000",
+    "employmentType": "Full-time",
+    "team": "Data Platform",
+    "postedDate": "2026-03-01",
+    "description": "In this senior role, you will lead architecture decisions for streaming and batch data systems serving multiple products. You will work closely with product analytics, data science, and governance teams to create trusted, scalable datasets and standards that improve developer productivity and business confidence in data.",
+    "responsibilities": [
+      "Architect and evolve batch + streaming pipeline foundations",
+      "Lead schema evolution and data contracts",
+      "Set standards for data observability and reliability",
+      "Mentor engineers and drive technical roadmap execution"
+    ],
+    "minimumQualifications": [
+      "Advanced experience in distributed data systems",
+      "Hands-on Kafka and Spark expertise",
+      "Ability to lead large technical initiatives"
+    ],
+    "preferredQualifications": [
+      "Experience with data platform governance",
+      "Cloud infrastructure as code knowledge"
+    ],
+    "benefits": [
+      "Top-tier healthcare",
+      "Equity",
+      "401(k) matching",
+      "Flexible schedule"
+    ]
   },
   {
     "id": "job-7",
-    "title": "Backend Engineer",
-    "company": "API Masters",
-    "location": "Denver, CO",
-    "requiredSkills": ["Python", "Java", "PostgreSQL", "REST APIs", "Microservices"],
-    "preferredSkills": ["Kafka", "Redis", "Docker", "Kubernetes"],
-    "requiredExperience": "3+ years",
+    "title": "Full Stack Developer",
+    "company": "WebScale Co",
+    "location": "Remote",
+    "requiredSkills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "REST APIs"
+    ],
+    "preferredSkills": [
+      "TypeScript",
+      "AWS",
+      "Docker",
+      "GraphQL"
+    ],
+    "requiredExperience": "2+ years",
     "certifications": [],
-    "description": "Design and build high-performance backend services."
+    "salaryEstimate": "$110,000 - $140,000",
+    "employmentType": "Full-time",
+    "team": "Product Engineering",
+    "postedDate": "2026-02-23",
+    "description": "WebScale Co is looking for a Full Stack Developer to build customer-facing web experiences and backend services used by SMB customers globally. You will collaborate with design, product, and platform teams to ship features with measurable business impact.",
+    "responsibilities": [
+      "Build front-end features in React",
+      "Develop backend APIs in Node.js",
+      "Write tests and participate in code reviews",
+      "Collaborate with product and design"
+    ],
+    "minimumQualifications": [
+      "Professional JavaScript development experience",
+      "Experience building APIs and relational data models"
+    ],
+    "preferredQualifications": [
+      "TypeScript and GraphQL exposure",
+      "Cloud deployment familiarity"
+    ],
+    "benefits": [
+      "Remote stipend",
+      "Health benefits",
+      "Annual learning budget"
+    ]
   },
   {
     "id": "job-8",
+    "title": "Backend Engineer",
+    "company": "API Masters",
+    "location": "Denver, CO",
+    "requiredSkills": [
+      "Python",
+      "Java",
+      "PostgreSQL",
+      "REST APIs",
+      "Microservices"
+    ],
+    "preferredSkills": [
+      "Kafka",
+      "Redis",
+      "Docker",
+      "Kubernetes"
+    ],
+    "requiredExperience": "3+ years",
+    "certifications": [],
+    "salaryEstimate": "$125,000 - $160,000",
+    "employmentType": "Full-time",
+    "team": "Core Services",
+    "postedDate": "2026-02-25",
+    "description": "API Masters is hiring a Backend Engineer to design, ship, and operate high-throughput APIs for enterprise clients. You will work on distributed services where performance, reliability, and correctness are critical.",
+    "responsibilities": [
+      "Design robust API contracts",
+      "Implement resilient service patterns",
+      "Optimize service/database performance",
+      "Contribute to reliability engineering practices"
+    ],
+    "minimumQualifications": [
+      "Strong backend programming background",
+      "Experience with SQL optimization",
+      "Understanding of distributed systems tradeoffs"
+    ],
+    "preferredQualifications": [
+      "Event-driven architecture experience",
+      "Container orchestration familiarity"
+    ],
+    "benefits": [
+      "Comprehensive health plans",
+      "401(k)",
+      "Quarterly bonus"
+    ]
+  },
+  {
+    "id": "job-9",
+    "title": "Security Engineer",
+    "company": "SecureNet Systems",
+    "location": "Seattle, WA",
+    "requiredSkills": [
+      "Security",
+      "Python",
+      "Linux",
+      "SIEM",
+      "Networking"
+    ],
+    "preferredSkills": [
+      "AWS",
+      "Kubernetes",
+      "Compliance",
+      "Penetration Testing"
+    ],
+    "requiredExperience": "4+ years",
+    "certifications": [
+      "CISSP",
+      "AWS Security Specialty",
+      "CEH"
+    ],
+    "salaryEstimate": "$148,000 - $182,000",
+    "employmentType": "Full-time",
+    "team": "Security Engineering",
+    "postedDate": "2026-02-14",
+    "description": "SecureNet Systems seeks a Security Engineer to strengthen cloud and application security posture across internal and customer-facing systems. You will blend detection engineering, vulnerability management, and secure design guidance.",
+    "responsibilities": [
+      "Develop detection content and response playbooks",
+      "Partner on secure architecture reviews",
+      "Drive vulnerability remediation workflows",
+      "Support compliance audit readiness"
+    ],
+    "minimumQualifications": [
+      "Security operations or security engineering experience",
+      "Strong understanding of cloud and network security controls"
+    ],
+    "preferredQualifications": [
+      "Hands-on threat hunting experience",
+      "SOC2/ISO 27001 familiarity"
+    ],
+    "benefits": [
+      "Health plans",
+      "Paid certifications",
+      "Performance bonus"
+    ]
+  },
+  {
+    "id": "job-10",
     "title": "Junior Cloud Engineer",
     "company": "CloudStart",
     "location": "Remote",
-    "requiredSkills": ["AWS", "Python", "Linux", "Docker"],
-    "preferredSkills": ["Terraform", "Kubernetes", "CI/CD"],
+    "requiredSkills": [
+      "AWS",
+      "Python",
+      "Linux",
+      "Docker"
+    ],
+    "preferredSkills": [
+      "Terraform",
+      "Kubernetes",
+      "CI/CD"
+    ],
     "requiredExperience": "0-2 years",
-    "certifications": ["AWS Cloud Practitioner"],
-    "description": "Entry-level cloud infrastructure role with growth potential."
+    "certifications": [
+      "AWS Cloud Practitioner"
+    ],
+    "salaryEstimate": "$78,000 - $101,000",
+    "employmentType": "Full-time",
+    "team": "Cloud Operations",
+    "postedDate": "2026-03-02",
+    "description": "CloudStart is looking for a Junior Cloud Engineer eager to grow in cloud infrastructure and production support. You will rotate through platform projects and receive mentorship from senior cloud engineers while contributing to real operational work from day one.",
+    "responsibilities": [
+      "Assist with cloud environment maintenance",
+      "Support monitoring/alerting configuration",
+      "Document operational runbooks",
+      "Participate in on-call shadowing"
+    ],
+    "minimumQualifications": [
+      "Foundational AWS knowledge",
+      "Basic scripting skills",
+      "Interest in cloud operations"
+    ],
+    "preferredQualifications": [
+      "Internship or project experience with containers",
+      "Any cloud certification"
+    ],
+    "benefits": [
+      "Mentorship program",
+      "Certification reimbursement",
+      "Remote stipend"
+    ]
+  },
+  {
+    "id": "job-11",
+    "title": "Machine Learning Engineer",
+    "company": "Visionary AI Labs",
+    "location": "Boston, MA",
+    "requiredSkills": [
+      "Python",
+      "Machine Learning",
+      "PyTorch",
+      "MLOps",
+      "SQL"
+    ],
+    "preferredSkills": [
+      "AWS",
+      "Kubernetes",
+      "Feature Stores",
+      "Airflow"
+    ],
+    "requiredExperience": "3-5 years",
+    "certifications": [],
+    "salaryEstimate": "$150,000 - $190,000",
+    "employmentType": "Full-time",
+    "team": "Applied ML",
+    "postedDate": "2026-02-28",
+    "description": "Visionary AI Labs is hiring an ML Engineer to productionize models for recommendation and ranking systems used in consumer applications. You will work across model lifecycle tooling, feature engineering pipelines, and model-serving infrastructure.",
+    "responsibilities": [
+      "Deploy and monitor ML models in production",
+      "Build reusable ML pipeline components",
+      "Collaborate with data scientists on model readiness",
+      "Improve model observability and drift detection"
+    ],
+    "minimumQualifications": [
+      "Strong software engineering foundations",
+      "Experience with model deployment and monitoring",
+      "Solid data engineering fundamentals"
+    ],
+    "preferredQualifications": [
+      "Experience with online inference systems",
+      "Feature store or experiment platform exposure"
+    ],
+    "benefits": [
+      "Healthcare",
+      "Equity",
+      "Conference budget"
+    ]
+  },
+  {
+    "id": "job-12",
+    "title": "Site Reliability Engineer",
+    "company": "NorthStar Commerce",
+    "location": "Chicago, IL (Hybrid)",
+    "requiredSkills": [
+      "Kubernetes",
+      "Linux",
+      "Go",
+      "Observability",
+      "Incident Response"
+    ],
+    "preferredSkills": [
+      "AWS",
+      "Terraform",
+      "Prometheus",
+      "Grafana"
+    ],
+    "requiredExperience": "4+ years",
+    "certifications": [
+      "CKA"
+    ],
+    "salaryEstimate": "$142,000 - $176,000",
+    "employmentType": "Full-time",
+    "team": "Reliability Engineering",
+    "postedDate": "2026-03-03",
+    "description": "NorthStar Commerce is seeking an SRE to improve reliability for high-traffic e-commerce services. You will focus on service-level objectives, incident management processes, and automation that reduces operational toil.",
+    "responsibilities": [
+      "Define and monitor SLOs",
+      "Lead incident response improvements",
+      "Automate operational tasks",
+      "Partner with product teams on reliability objectives"
+    ],
+    "minimumQualifications": [
+      "Experience running production Kubernetes workloads",
+      "Strong debugging and incident response skills"
+    ],
+    "preferredQualifications": [
+      "Experience with chaos testing",
+      "Background in high-traffic consumer systems"
+    ],
+    "benefits": [
+      "Medical/dental/vision",
+      "401(k)",
+      "Wellness stipend"
+    ]
+  },
+  {
+    "id": "job-13",
+    "title": "Platform Engineer",
+    "company": "Harbor Fintech",
+    "location": "New York, NY",
+    "requiredSkills": [
+      "Terraform",
+      "AWS",
+      "Kubernetes",
+      "GitHub Actions",
+      "Security"
+    ],
+    "preferredSkills": [
+      "Policy as Code",
+      "OIDC",
+      "Python",
+      "Cost Optimization"
+    ],
+    "requiredExperience": "5+ years",
+    "certifications": [
+      "AWS Certified Solutions Architect"
+    ],
+    "salaryEstimate": "$170,000 - $210,000",
+    "employmentType": "Full-time",
+    "team": "Internal Platform",
+    "postedDate": "2026-03-04",
+    "description": "Harbor Fintech is expanding our platform engineering group to build secure, developer-friendly infrastructure for regulated financial workloads. You will define golden paths for service deployment and strengthen access/security controls across engineering environments.",
+    "responsibilities": [
+      "Build internal developer platform capabilities",
+      "Create secure deployment templates",
+      "Improve infrastructure governance and policy automation",
+      "Partner with security/compliance teams"
+    ],
+    "minimumQualifications": [
+      "Strong IaC and cloud platform experience",
+      "Experience in regulated or compliance-focused environments"
+    ],
+    "preferredQualifications": [
+      "Policy-as-code tooling experience",
+      "Identity and access management expertise"
+    ],
+    "benefits": [
+      "Equity",
+      "Commuter support",
+      "Annual bonus"
+    ]
+  },
+  {
+    "id": "job-14",
+    "title": "Cloud Security Engineer",
+    "company": "BlueShield Digital",
+    "location": "Remote (US)",
+    "requiredSkills": [
+      "AWS",
+      "Security",
+      "IAM",
+      "Python",
+      "Compliance"
+    ],
+    "preferredSkills": [
+      "Kubernetes",
+      "SIEM",
+      "Threat Modeling",
+      "Terraform"
+    ],
+    "requiredExperience": "4-6 years",
+    "certifications": [
+      "AWS Security Specialty",
+      "CISSP"
+    ],
+    "salaryEstimate": "$155,000 - $192,000",
+    "employmentType": "Full-time",
+    "team": "Cloud Security",
+    "postedDate": "2026-03-01",
+    "description": "BlueShield Digital is hiring a Cloud Security Engineer to harden cloud infrastructure and improve security telemetry across all product environments. This role is hands-on and strategic, blending implementation work with security architecture guidance.",
+    "responsibilities": [
+      "Implement cloud security controls",
+      "Automate security checks in CI/CD",
+      "Partner with engineering teams on remediation",
+      "Support audit and compliance programs"
+    ],
+    "minimumQualifications": [
+      "Hands-on cloud security engineering experience",
+      "Strong understanding of IAM and network segmentation"
+    ],
+    "preferredQualifications": [
+      "Kubernetes security background",
+      "Threat detection engineering experience"
+    ],
+    "benefits": [
+      "Health plans",
+      "Security training budget",
+      "Remote office allowance"
+    ]
+  },
+  {
+    "id": "job-15",
+    "title": "Frontend Engineer (React)",
+    "company": "Lattice Learning",
+    "location": "Los Angeles, CA (Hybrid)",
+    "requiredSkills": [
+      "React",
+      "JavaScript",
+      "TypeScript",
+      "CSS",
+      "Testing"
+    ],
+    "preferredSkills": [
+      "Node.js",
+      "GraphQL",
+      "Accessibility",
+      "Design Systems"
+    ],
+    "requiredExperience": "3+ years",
+    "certifications": [],
+    "salaryEstimate": "$120,000 - $155,000",
+    "employmentType": "Full-time",
+    "team": "Web Experience",
+    "postedDate": "2026-03-05",
+    "description": "Lattice Learning is looking for a Frontend Engineer to build engaging, accessible learning experiences for students and educators. You will collaborate closely with product design and backend teams to ship polished features and improve UI performance.",
+    "responsibilities": [
+      "Build complex UI workflows in React",
+      "Improve frontend test coverage",
+      "Partner on component library evolution",
+      "Optimize web performance and accessibility"
+    ],
+    "minimumQualifications": [
+      "Strong React and JavaScript/TypeScript experience",
+      "Experience with frontend testing tools"
+    ],
+    "preferredQualifications": [
+      "Experience building design systems",
+      "Familiarity with GraphQL"
+    ],
+    "benefits": [
+      "Healthcare",
+      "401(k)",
+      "Learning stipend"
+    ]
+  },
+  {
+    "id": "job-16",
+    "title": "Product Data Analyst",
+    "company": "Beacon Apps",
+    "location": "Remote (US)",
+    "requiredSkills": [
+      "SQL",
+      "Data Visualization",
+      "Experimentation",
+      "Python",
+      "Statistics"
+    ],
+    "preferredSkills": [
+      "Looker",
+      "dbt",
+      "Airflow",
+      "Product Analytics"
+    ],
+    "requiredExperience": "2-4 years",
+    "certifications": [],
+    "salaryEstimate": "$102,000 - $132,000",
+    "employmentType": "Full-time",
+    "team": "Product Analytics",
+    "postedDate": "2026-03-04",
+    "description": "Beacon Apps is seeking a Product Data Analyst to generate actionable insights for product and growth teams. You will design analyses, define key metrics, and partner with PMs and engineers to evaluate feature impact through experimentation.",
+    "responsibilities": [
+      "Build dashboards and reporting layers",
+      "Design and analyze A/B tests",
+      "Define metric frameworks for product initiatives",
+      "Communicate insights to technical and non-technical stakeholders"
+    ],
+    "minimumQualifications": [
+      "Strong SQL and analytical reasoning",
+      "Experience with product metrics and experimentation"
+    ],
+    "preferredQualifications": [
+      "Experience with modern BI stack",
+      "Python-based analysis workflows"
+    ],
+    "benefits": [
+      "Remote-first",
+      "Wellness stipend",
+      "Annual bonus eligibility"
+    ]
+  },
+  {
+    "id": "job-17",
+    "title": "IT Systems Administrator",
+    "company": "MetroHealth Partners",
+    "location": "Phoenix, AZ",
+    "requiredSkills": [
+      "Windows Server",
+      "Linux",
+      "Active Directory",
+      "Networking",
+      "Scripting"
+    ],
+    "preferredSkills": [
+      "Azure",
+      "Security",
+      "Intune",
+      "Automation"
+    ],
+    "requiredExperience": "3+ years",
+    "certifications": [
+      "CompTIA Security+"
+    ],
+    "salaryEstimate": "$86,000 - $112,000",
+    "employmentType": "Full-time",
+    "team": "IT Operations",
+    "postedDate": "2026-02-26",
+    "description": "MetroHealth Partners is hiring an IT Systems Administrator to maintain and improve endpoint, identity, and server infrastructure supporting clinical and business operations. The role combines daily operational support with systems improvement projects.",
+    "responsibilities": [
+      "Administer AD and endpoint platforms",
+      "Maintain server patching and backup operations",
+      "Support user access and identity workflows",
+      "Automate repetitive operational tasks"
+    ],
+    "minimumQualifications": [
+      "Systems administration experience in mixed Windows/Linux environments",
+      "Strong troubleshooting skills"
+    ],
+    "preferredQualifications": [
+      "Healthcare IT or regulated environment experience",
+      "Azure administration exposure"
+    ],
+    "benefits": [
+      "Health benefits",
+      "Retirement plan",
+      "Tuition assistance"
+    ]
+  },
+  {
+    "id": "job-18",
+    "title": "QA Automation Engineer",
+    "company": "Velocity Commerce",
+    "location": "Remote",
+    "requiredSkills": [
+      "Test Automation",
+      "JavaScript",
+      "API Testing",
+      "CI/CD",
+      "Selenium"
+    ],
+    "preferredSkills": [
+      "Playwright",
+      "Performance Testing",
+      "Node.js",
+      "SQL"
+    ],
+    "requiredExperience": "2-5 years",
+    "certifications": [],
+    "salaryEstimate": "$104,000 - $136,000",
+    "employmentType": "Full-time",
+    "team": "Quality Engineering",
+    "postedDate": "2026-03-03",
+    "description": "Velocity Commerce is seeking a QA Automation Engineer to improve release quality across web and API surfaces. You will help establish scalable automation patterns and collaborate across engineering teams to reduce manual testing overhead.",
+    "responsibilities": [
+      "Design and maintain automated test suites",
+      "Integrate tests into CI pipelines",
+      "Support release quality gates and defect triage",
+      "Drive quality improvements with engineers and PMs"
+    ],
+    "minimumQualifications": [
+      "Hands-on automation framework experience",
+      "Strong understanding of API and UI testing"
+    ],
+    "preferredQualifications": [
+      "Playwright/Cypress experience",
+      "Performance test tooling exposure"
+    ],
+    "benefits": [
+      "Medical/dental/vision",
+      "Remote equipment stipend",
+      "Career development budget"
+    ]
   }
 ]
