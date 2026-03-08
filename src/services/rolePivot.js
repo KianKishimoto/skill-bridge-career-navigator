@@ -4,6 +4,12 @@ function normalizeText(value) {
   return (value || '').toString().trim().toLowerCase();
 }
 
+function normalizeNonEmptyArray(values = []) {
+  return values
+    .map((value) => normalizeText(value))
+    .filter(Boolean);
+}
+
 export function getGeneralRoleKey(title) {
   const normalized = normalizeText(title)
     .replace(/\b(jr\.?|junior|sr\.?|senior|lead|principal|staff)\b/g, '')
@@ -48,12 +54,12 @@ export function getAvailableGeneralRoles(jobs = []) {
 }
 
 function buildAnalysis(profile, target, metadata = {}) {
-  const userSkills = new Set((profile.skills || []).map((s) => normalizeText(s)));
-  const userCerts = new Set((profile.certifications || []).map((c) => normalizeText(c)));
+  const userSkills = new Set(normalizeNonEmptyArray(profile.skills));
+  const userCerts = new Set(normalizeNonEmptyArray(profile.certifications));
 
-  const requiredSkills = (target.requiredSkills || []).map((s) => normalizeText(s));
-  const preferredSkills = (target.preferredSkills || []).map((s) => normalizeText(s));
-  const requiredCerts = (target.certifications || []).map((c) => normalizeText(c));
+  const requiredSkills = normalizeNonEmptyArray(target.requiredSkills);
+  const preferredSkills = normalizeNonEmptyArray(target.preferredSkills);
+  const requiredCerts = normalizeNonEmptyArray(target.certifications);
 
   const missingRequired = requiredSkills.filter((s) => !userSkills.has(s));
   const missingPreferred = preferredSkills.filter((s) => !userSkills.has(s));
@@ -97,14 +103,17 @@ export function analyzeGeneralRolePivot(profile, jobs = [], generalRoleKey) {
   roleJobs.forEach((job) => {
     (job.requiredSkills || []).forEach((skill) => {
       const key = normalizeText(skill);
+      if (!key) return;
       requiredSkillCounts.set(key, (requiredSkillCounts.get(key) || 0) + 1);
     });
     (job.preferredSkills || []).forEach((skill) => {
       const key = normalizeText(skill);
+      if (!key) return;
       preferredSkillCounts.set(key, (preferredSkillCounts.get(key) || 0) + 1);
     });
     (job.certifications || []).forEach((cert) => {
       const key = normalizeText(cert);
+      if (!key) return;
       certCounts.set(key, (certCounts.get(key) || 0) + 1);
     });
   });

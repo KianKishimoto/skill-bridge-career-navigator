@@ -70,6 +70,26 @@ describe('matchJobsToProfile', () => {
     expect(result.every((j) => j.matchScore >= 0 && j.matchScore <= 100)).toBe(true);
   });
 
+
+  it('ignores malformed job and profile skill values without crashing', () => {
+    const profile = { skills: ['AWS', null, 42], certifications: [null, 'AWS Certified'] };
+    const jobs = [
+      {
+        id: 'j-malformed',
+        title: 'Cloud Engineer',
+        requiredSkills: ['AWS', null, 123],
+        preferredSkills: [undefined, 'Kubernetes'],
+        certifications: [null, 'AWS Certified'],
+      },
+    ];
+
+    const result = matchJobsToProfile(profile, jobs);
+
+    expect(result).toHaveLength(1);
+    expect(result[0].matchScore).toBe(50);
+    expect(result[0].missingSkills).toEqual(['123']);
+    expect(result[0].matchedCertifications).toBe(1);
+  });
   it('handles null/undefined profile gracefully', () => {
     const result = matchJobsToProfile(null, mockJobs);
     expect(result).toHaveLength(2);
