@@ -290,6 +290,11 @@ ul {
   font-size: 0.9rem;
 }
 
+.job-full-desc {
+  margin: 0.35rem 0 0.75rem;
+  color: var(--text);
+}
+
 .job-details .missing {
   color: var(--warning);
   margin-top: 0.5rem;

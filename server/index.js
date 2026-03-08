@@ -192,11 +192,13 @@ const extractWithFallback = (resumeText) => {
   const experience = [];
   const education = [];
   const knownSkillBank = [
-    'AWS', 'Azure', 'GCP', 'Python', 'JavaScript', 'TypeScript', 'Java', 'C#', 'C++', 'Go',
-    'React', 'Angular', 'Vue', 'Node.js', 'Express', 'Django', 'Flask', 'Spring Boot',
-    'Kubernetes', 'Docker', 'Terraform', 'Ansible', 'Jenkins', 'GitHub Actions', 'CI/CD',
-    'SQL', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Linux', 'Git', 'REST', 'GraphQL',
-    'Machine Learning', 'Data Analysis', 'Spark', 'Kafka'
+    'AWS', 'Azure', 'GCP',
+    'Python', 'JavaScript', 'TypeScript', 'Java', 'C#', 'C++', 'Ruby', 'PHP', 'Swift', 'Kotlin',
+    'React', 'Angular', 'Vue', 'Next.js', 'Node.js', 'Express', 'Django', 'Flask', 'FastAPI', 'Spring Boot',
+    'Kubernetes', 'Docker', 'Terraform', 'Ansible', 'Helm', 'ArgoCD', 'Jenkins', 'GitHub Actions', 'CI/CD',
+    'SQL', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Snowflake',
+    'Linux', 'Git', 'REST', 'GraphQL',
+    'Machine Learning', 'Data Analysis', 'Pandas', 'NumPy', 'Spark', 'Kafka', 'Airflow'
   ];
 
   knownSkillBank.forEach((skill) => {
