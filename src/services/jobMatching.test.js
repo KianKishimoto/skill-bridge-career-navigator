@@ -98,7 +98,7 @@ describe('matchJobsToProfile', () => {
 });
 
 describe('mergeAiJobMatchScores', () => {
-  it('overrides fallback scores when AI scores are available and keeps fallback for missing jobs', () => {
+  it('keeps required-skills match score stable while attaching AI insights', () => {
     const baseMatches = [
       { id: 'j1', matchScore: 60 },
       { id: 'j2', matchScore: 40 },
@@ -116,10 +116,13 @@ describe('mergeAiJobMatchScores', () => {
 
     const merged = mergeAiJobMatchScores(baseMatches, aiMatches);
 
-    expect(merged[0].id).toBe('j2');
-    expect(merged[0].matchScore).toBe(88);
-    expect(merged[0].matchSource).toBe('ai');
-    expect(merged[0].aiInsights.experienceScore).toBe(90);
+    expect(merged[0].id).toBe('j1');
+
+    const aiJob = merged.find((job) => job.id === 'j2');
+    expect(aiJob.matchScore).toBe(40);
+    expect(aiJob.aiMatchScore).toBe(88);
+    expect(aiJob.matchSource).toBe('ai');
+    expect(aiJob.aiInsights.experienceScore).toBe(90);
 
     const fallbackJob = merged.find((job) => job.id === 'j1');
     expect(fallbackJob.matchSource).toBe('fallback');

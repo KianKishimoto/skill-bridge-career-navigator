@@ -71,7 +71,7 @@ export function mergeAiJobMatchScores(baseMatches, aiMatches) {
 
       return {
         ...job,
-        matchScore: ai.matchScore,
+        aiMatchScore: ai.matchScore,
         aiInsights: {
           experienceScore: ai.experienceScore,
           skillsScore: ai.skillsScore,
