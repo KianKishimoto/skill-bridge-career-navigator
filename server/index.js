@@ -191,35 +191,34 @@ const extractWithFallback = (resumeText) => {
   const skills = [];
   const experience = [];
   const education = [];
-  const certifications = [];
-
-  const skillKeywords = [
-    'AWS', 'Azure', 'GCP', 'Python', 'JavaScript', 'Java', 'React', 'Node.js',
-    'Kubernetes', 'Docker', 'Terraform', 'SQL', 'Linux', 'CI/CD', 'Git',
-    'REST', 'API', 'Machine Learning', 'Data', 'Spark', 'Kafka'
+  const knownSkillBank = [
+    'AWS', 'Azure', 'GCP', 'Python', 'JavaScript', 'TypeScript', 'Java', 'C#', 'C++', 'Go',
+    'React', 'Angular', 'Vue', 'Node.js', 'Express', 'Django', 'Flask', 'Spring Boot',
+    'Kubernetes', 'Docker', 'Terraform', 'Ansible', 'Jenkins', 'GitHub Actions', 'CI/CD',
+    'SQL', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Linux', 'Git', 'REST', 'GraphQL',
+    'Machine Learning', 'Data Analysis', 'Spark', 'Kafka'
   ];
 
-  const lines = resumeText.split(/\n/).map(l => l.trim()).filter(Boolean);
-  const lowerText = resumeText.toLowerCase();
-
-  skillKeywords.forEach(skill => {
-    if (lowerText.includes(skill.toLowerCase())) {
+  knownSkillBank.forEach((skill) => {
+    const escapedSkill = skill.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const hasSkill = new RegExp(`(^|[^a-z0-9])${escapedSkill}([^a-z0-9]|$)`, 'i').test(resumeText);
+    if (hasSkill) {
       skills.push(skill);
     }
   });
 
-  const certPatterns = [
-    /AWS Certified[^,\n]*/gi,
-    /CKA|CKAD|CKS/gi,
-    /CISSP|CEH|Security\+/gi,
-    /Terraform Associate/gi,
-    /([A-Z][a-z]+ Certified[^,\n]*)/g,
+  const degreePatterns = [
+    /\b(Ph\.?D\.?|Doctorate|DPhil)\b/gi,
+    /\b(Master(?:'s)?(?:\s+of\s+[A-Za-z&\s.]+)?|M\.?S\.?|M\.?A\.?|MBA|M\.?Eng\.?|M\.?Sc\.?)\b/gi,
+    /\b(Bachelor(?:'s)?(?:\s+of\s+[A-Za-z&\s.]+)?|B\.?S\.?|B\.?A\.?|B\.?Eng\.?|B\.?Sc\.?)\b/gi,
+    /\b(Associate(?:'s)?(?:\s+Degree)?)\b/gi,
+    /\b(High School Diploma|GED)\b/gi,
   ];
 
-  certPatterns.forEach(pattern => {
+  degreePatterns.forEach((pattern) => {
     const matches = resumeText.match(pattern);
     if (matches) {
-      matches.forEach(m => certifications.push(m.trim()));
+      matches.forEach((match) => education.push(match.replace(/\s+/g, ' ').trim()));
     }
   });
 
@@ -231,8 +230,8 @@ const extractWithFallback = (resumeText) => {
   return {
     skills: [...new Set(skills)],
     experience: experience.length ? experience : [{ title: 'See resume', company: 'N/A', years: 0 }],
-    education: education.length ? education : ['See resume'],
-    certifications: [...new Set(certifications)],
+    education: education.length ? [...new Set(education)] : ['See resume'],
+    certifications: [],
   };
 };
 
