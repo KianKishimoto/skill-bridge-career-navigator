@@ -3,81 +3,444 @@
     "id": "cert-1",
     "name": "AWS Certified Solutions Architect - Associate",
     "provider": "AWS",
-    "skillsCovered": ["AWS", "Cloud Architecture", "Networking", "Security"],
+    "skillsCovered": [
+      "AWS",
+      "Cloud Architecture",
+      "Networking",
+      "Security"
+    ],
     "timeToComplete": "2-3 months",
     "cost": "Paid (~$150)",
-    "relevanceRoles": ["Cloud Engineer", "DevOps Engineer", "Solutions Architect"]
+    "relevanceRoles": [
+      "Cloud Engineer",
+      "DevOps Engineer",
+      "Solutions Architect"
+    ],
+    "difficulty": "Intermediate",
+    "examFormat": "65 questions, multiple choice",
+    "recertification": "Every 3 years",
+    "officialUrl": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+    "description": "Validates ability to design cost-efficient, resilient architectures on AWS and apply security best practices to cloud workloads."
   },
   {
     "id": "cert-2",
     "name": "AWS Certified Developer - Associate",
     "provider": "AWS",
-    "skillsCovered": ["AWS", "Lambda", "DynamoDB", "API Gateway"],
+    "skillsCovered": [
+      "AWS",
+      "Lambda",
+      "DynamoDB",
+      "API Gateway"
+    ],
     "timeToComplete": "2-3 months",
     "cost": "Paid (~$150)",
-    "relevanceRoles": ["Cloud Engineer", "Backend Engineer", "Full Stack Developer"]
+    "relevanceRoles": [
+      "Cloud Engineer",
+      "Backend Engineer",
+      "Full Stack Developer"
+    ],
+    "difficulty": "Intermediate",
+    "examFormat": "65 questions, multiple choice",
+    "recertification": "Every 3 years",
+    "officialUrl": "https://aws.amazon.com/certification/certified-developer-associate/",
+    "description": "Focuses on developing, deploying, and debugging cloud-native applications using AWS services and serverless patterns."
   },
   {
     "id": "cert-3",
     "name": "Certified Kubernetes Administrator (CKA)",
     "provider": "CNCF",
-    "skillsCovered": ["Kubernetes", "Containers", "Orchestration"],
+    "skillsCovered": [
+      "Kubernetes",
+      "Containers",
+      "Orchestration"
+    ],
     "timeToComplete": "1-2 months",
     "cost": "Paid (~$395)",
-    "relevanceRoles": ["Cloud Engineer", "DevOps Engineer"]
+    "relevanceRoles": [
+      "Cloud Engineer",
+      "DevOps Engineer",
+      "SRE"
+    ],
+    "difficulty": "Intermediate",
+    "examFormat": "Performance-based, hands-on",
+    "recertification": "Every 2 years",
+    "officialUrl": "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/",
+    "description": "Performance-based exam that validates practical cluster administration and troubleshooting skills in Kubernetes."
   },
   {
     "id": "cert-4",
     "name": "HashiCorp Certified: Terraform Associate",
     "provider": "HashiCorp",
-    "skillsCovered": ["Terraform", "IaC", "Cloud Provisioning"],
+    "skillsCovered": [
+      "Terraform",
+      "IaC",
+      "Cloud Provisioning"
+    ],
     "timeToComplete": "1-2 months",
     "cost": "Paid (~$70)",
-    "relevanceRoles": ["Cloud Engineer", "DevOps Engineer"]
+    "relevanceRoles": [
+      "Cloud Engineer",
+      "DevOps Engineer",
+      "Platform Engineer"
+    ],
+    "difficulty": "Intermediate",
+    "examFormat": "Online proctored",
+    "recertification": "No hard expiration; version-based",
+    "officialUrl": "https://developer.hashicorp.com/certification/terraform-associate",
+    "description": "Demonstrates infrastructure-as-code fundamentals and ability to build reusable Terraform workflows."
   },
   {
     "id": "cert-5",
     "name": "AWS Cloud Practitioner",
     "provider": "AWS",
-    "skillsCovered": ["AWS Basics", "Cloud Concepts"],
+    "skillsCovered": [
+      "AWS Basics",
+      "Cloud Concepts"
+    ],
     "timeToComplete": "2-4 weeks",
     "cost": "Paid (~$100)",
-    "relevanceRoles": ["Cloud Engineer", "Junior Cloud Engineer"]
+    "relevanceRoles": [
+      "Cloud Engineer",
+      "Junior Cloud Engineer",
+      "Product Manager"
+    ],
+    "difficulty": "Beginner",
+    "examFormat": "65 questions, multiple choice",
+    "recertification": "Every 3 years",
+    "officialUrl": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+    "description": "Entry-level cloud certification covering AWS core services, pricing, security, and support models."
   },
   {
     "id": "cert-6",
     "name": "AWS Certified DevOps Engineer - Professional",
     "provider": "AWS",
-    "skillsCovered": ["CI/CD", "Monitoring", "Automation", "AWS"],
+    "skillsCovered": [
+      "CI/CD",
+      "Monitoring",
+      "Automation",
+      "AWS"
+    ],
     "timeToComplete": "3-4 months",
     "cost": "Paid (~$300)",
-    "relevanceRoles": ["DevOps Engineer", "Cloud Engineer"]
+    "relevanceRoles": [
+      "DevOps Engineer",
+      "Cloud Engineer",
+      "SRE"
+    ],
+    "difficulty": "Advanced",
+    "examFormat": "75 questions, multiple choice",
+    "recertification": "Every 3 years",
+    "officialUrl": "https://aws.amazon.com/certification/certified-devops-engineer-professional/",
+    "description": "Advanced certification centered on automation, operational excellence, and resilient continuous delivery on AWS."
   },
   {
     "id": "cert-7",
-    "name": "Databricks Certified Data Engineer",
+    "name": "Databricks Certified Data Engineer Associate",
     "provider": "Databricks",
-    "skillsCovered": ["Spark", "Data Engineering", "Delta Lake"],
+    "skillsCovered": [
+      "Spark",
+      "Data Engineering",
+      "Delta Lake"
+    ],
     "timeToComplete": "2-3 months",
     "cost": "Paid (~$200)",
-    "relevanceRoles": ["Data Engineer"]
+    "relevanceRoles": [
+      "Data Engineer"
+    ],
+    "difficulty": "Intermediate",
+    "examFormat": "Multiple choice",
+    "recertification": "Periodic version updates",
+    "officialUrl": "https://www.databricks.com/learn/certification/data-engineer-associate",
+    "description": "Validates practical skills in data pipeline development and lakehouse engineering with Databricks."
   },
   {
     "id": "cert-8",
     "name": "CISSP",
     "provider": "ISC2",
-    "skillsCovered": ["Security", "Risk Management", "Compliance"],
+    "skillsCovered": [
+      "Security",
+      "Risk Management",
+      "Compliance"
+    ],
     "timeToComplete": "4-6 months",
     "cost": "Paid (~$749)",
-    "relevanceRoles": ["Security Engineer"]
+    "relevanceRoles": [
+      "Security Engineer",
+      "Security Architect"
+    ],
+    "difficulty": "Advanced",
+    "examFormat": "CAT exam",
+    "recertification": "Annual CPE maintenance",
+    "officialUrl": "https://www.isc2.org/certifications/cissp",
+    "description": "Globally recognized security credential covering governance, architecture, operations, and risk management domains."
   },
   {
     "id": "cert-9",
-    "name": "AWS Security Specialty",
+    "name": "AWS Certified Security - Specialty",
     "provider": "AWS",
-    "skillsCovered": ["AWS Security", "Compliance", "Encryption"],
+    "skillsCovered": [
+      "AWS Security",
+      "Compliance",
+      "Encryption"
+    ],
     "timeToComplete": "2-3 months",
     "cost": "Paid (~$300)",
-    "relevanceRoles": ["Security Engineer", "Cloud Engineer"]
+    "relevanceRoles": [
+      "Security Engineer",
+      "Cloud Engineer"
+    ],
+    "difficulty": "Advanced",
+    "examFormat": "65 questions, multiple choice",
+    "recertification": "Every 3 years",
+    "officialUrl": "https://aws.amazon.com/certification/certified-security-specialty/",
+    "description": "Focuses on designing and implementing secure AWS workloads and continuous cloud security operations."
+  },
+  {
+    "id": "cert-10",
+    "name": "Google Professional Cloud Architect",
+    "provider": "Google Cloud",
+    "skillsCovered": [
+      "GCP",
+      "Architecture",
+      "Networking",
+      "Security"
+    ],
+    "timeToComplete": "2-4 months",
+    "cost": "Paid (~$200)",
+    "relevanceRoles": [
+      "Cloud Engineer",
+      "Solutions Architect",
+      "Platform Engineer"
+    ],
+    "difficulty": "Advanced",
+    "examFormat": "Multiple choice and multiple select",
+    "recertification": "Every 2 years",
+    "officialUrl": "https://cloud.google.com/learn/certification/cloud-architect",
+    "description": "Demonstrates ability to design, plan, and manage robust Google Cloud solutions at enterprise scale."
+  },
+  {
+    "id": "cert-11",
+    "name": "Google Professional Data Engineer",
+    "provider": "Google Cloud",
+    "skillsCovered": [
+      "BigQuery",
+      "Data Pipelines",
+      "ML Workflows",
+      "GCP"
+    ],
+    "timeToComplete": "2-4 months",
+    "cost": "Paid (~$200)",
+    "relevanceRoles": [
+      "Data Engineer",
+      "ML Engineer"
+    ],
+    "difficulty": "Advanced",
+    "examFormat": "Multiple choice and multiple select",
+    "recertification": "Every 2 years",
+    "officialUrl": "https://cloud.google.com/learn/certification/data-engineer",
+    "description": "Covers design of data processing systems, data governance, and production ML data infrastructure on GCP."
+  },
+  {
+    "id": "cert-12",
+    "name": "Microsoft Certified: Azure Administrator Associate (AZ-104)",
+    "provider": "Microsoft",
+    "skillsCovered": [
+      "Azure",
+      "Identity",
+      "Compute",
+      "Storage",
+      "Networking"
+    ],
+    "timeToComplete": "2-3 months",
+    "cost": "Paid (~$165)",
+    "relevanceRoles": [
+      "Cloud Engineer",
+      "IT Administrator",
+      "Platform Engineer"
+    ],
+    "difficulty": "Intermediate",
+    "examFormat": "Case studies and multiple choice",
+    "recertification": "Annual renewal assessment",
+    "officialUrl": "https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/",
+    "description": "Validates operational administration of Azure resources, identity, networking, and governance controls."
+  },
+  {
+    "id": "cert-13",
+    "name": "Microsoft Certified: DevOps Engineer Expert (AZ-400)",
+    "provider": "Microsoft",
+    "skillsCovered": [
+      "Azure DevOps",
+      "CI/CD",
+      "IaC",
+      "Monitoring"
+    ],
+    "timeToComplete": "3-4 months",
+    "cost": "Paid (~$165)",
+    "relevanceRoles": [
+      "DevOps Engineer",
+      "Platform Engineer"
+    ],
+    "difficulty": "Advanced",
+    "examFormat": "Multiple choice and case studies",
+    "recertification": "Annual renewal assessment",
+    "officialUrl": "https://learn.microsoft.com/en-us/credentials/certifications/devops-engineer/",
+    "description": "Demonstrates end-to-end DevOps lifecycle expertise including release automation, security integration, and reliability."
+  },
+  {
+    "id": "cert-14",
+    "name": "CompTIA Security+",
+    "provider": "CompTIA",
+    "skillsCovered": [
+      "Network Security",
+      "Threat Management",
+      "Identity",
+      "Risk"
+    ],
+    "timeToComplete": "2-3 months",
+    "cost": "Paid (~$404)",
+    "relevanceRoles": [
+      "Security Analyst",
+      "IT Systems Administrator",
+      "Security Engineer"
+    ],
+    "difficulty": "Beginner-Intermediate",
+    "examFormat": "Multiple choice + performance-based",
+    "recertification": "Every 3 years",
+    "officialUrl": "https://www.comptia.org/certifications/security",
+    "description": "Foundational cybersecurity certification widely used for SOC, IT security, and systems hardening roles."
+  },
+  {
+    "id": "cert-15",
+    "name": "CompTIA Network+",
+    "provider": "CompTIA",
+    "skillsCovered": [
+      "Networking",
+      "Troubleshooting",
+      "Infrastructure",
+      "Protocols"
+    ],
+    "timeToComplete": "1-2 months",
+    "cost": "Paid (~$358)",
+    "relevanceRoles": [
+      "IT Systems Administrator",
+      "Network Engineer",
+      "Cloud Engineer"
+    ],
+    "difficulty": "Beginner-Intermediate",
+    "examFormat": "Multiple choice + performance-based",
+    "recertification": "Every 3 years",
+    "officialUrl": "https://www.comptia.org/certifications/network",
+    "description": "Builds networking fundamentals valuable for infrastructure, cloud, and operations engineering paths."
+  },
+  {
+    "id": "cert-16",
+    "name": "Certified Ethical Hacker (CEH)",
+    "provider": "EC-Council",
+    "skillsCovered": [
+      "Penetration Testing",
+      "Threat Analysis",
+      "Vulnerability Assessment"
+    ],
+    "timeToComplete": "2-4 months",
+    "cost": "Paid (~$1,199)",
+    "relevanceRoles": [
+      "Security Engineer",
+      "Penetration Tester"
+    ],
+    "difficulty": "Intermediate-Advanced",
+    "examFormat": "Multiple choice",
+    "recertification": "Every 3 years",
+    "officialUrl": "https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/",
+    "description": "Validates offensive security and ethical hacking methodologies for identifying and mitigating vulnerabilities."
+  },
+  {
+    "id": "cert-17",
+    "name": "PMI Agile Certified Practitioner (PMI-ACP)",
+    "provider": "PMI",
+    "skillsCovered": [
+      "Agile Delivery",
+      "Scrum",
+      "Kanban",
+      "Stakeholder Management"
+    ],
+    "timeToComplete": "1-3 months",
+    "cost": "Paid (~$495)",
+    "relevanceRoles": [
+      "Project Manager",
+      "Technical Program Manager",
+      "Product Manager"
+    ],
+    "difficulty": "Intermediate",
+    "examFormat": "180 questions",
+    "recertification": "Every 3 years",
+    "officialUrl": "https://www.pmi.org/certifications/agile-acp",
+    "description": "Agile delivery certification useful for cross-functional leaders working with software and platform teams."
+  },
+  {
+    "id": "cert-18",
+    "name": "SnowPro Core Certification",
+    "provider": "Snowflake",
+    "skillsCovered": [
+      "Snowflake",
+      "Data Warehousing",
+      "Performance Tuning"
+    ],
+    "timeToComplete": "1-2 months",
+    "cost": "Paid (~$175)",
+    "relevanceRoles": [
+      "Data Engineer",
+      "Analytics Engineer",
+      "Data Analyst"
+    ],
+    "difficulty": "Intermediate",
+    "examFormat": "100 questions",
+    "recertification": "Every 2 years",
+    "officialUrl": "https://learn.snowflake.com/en/certifications/snowpro-core/",
+    "description": "Demonstrates ability to implement and optimize core Snowflake data warehousing workloads."
+  },
+  {
+    "id": "cert-19",
+    "name": "dbt Fundamentals",
+    "provider": "dbt Labs",
+    "skillsCovered": [
+      "dbt",
+      "Analytics Engineering",
+      "Data Modeling",
+      "Testing"
+    ],
+    "timeToComplete": "2-4 weeks",
+    "cost": "Free",
+    "relevanceRoles": [
+      "Analytics Engineer",
+      "Data Analyst",
+      "Data Engineer"
+    ],
+    "difficulty": "Beginner",
+    "examFormat": "Online assessment",
+    "recertification": "N/A",
+    "officialUrl": "https://courses.getdbt.com/courses/fundamentals",
+    "description": "Popular entry-level credential for modern analytics workflows focused on modular SQL transformations and testing."
+  },
+  {
+    "id": "cert-20",
+    "name": "Professional Scrum Master I (PSM I)",
+    "provider": "Scrum.org",
+    "skillsCovered": [
+      "Scrum",
+      "Team Facilitation",
+      "Agile Practices"
+    ],
+    "timeToComplete": "2-6 weeks",
+    "cost": "Paid (~$200)",
+    "relevanceRoles": [
+      "Scrum Master",
+      "Project Manager",
+      "Engineering Manager"
+    ],
+    "difficulty": "Beginner-Intermediate",
+    "examFormat": "80 questions",
+    "recertification": "No expiration",
+    "officialUrl": "https://www.scrum.org/professional-scrum-certifications/professional-scrum-master-assessments",
+    "description": "Recognized scrum credential emphasizing agile principles, team effectiveness, and delivery facilitation."
   }
 ]
