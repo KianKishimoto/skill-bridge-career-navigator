@@ -351,6 +351,27 @@ ul {
   margin: 0;
 }
 
+
+.pivot-mode-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.pivot-mode-tabs button {
+  margin-top: 0;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #30363d;
+  background: transparent;
+  color: var(--text);
+}
+
+.pivot-mode-tabs button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
 .pivot-select {
   margin-bottom: 1rem;
 }
