@@ -1,13 +1,16 @@
 export function matchJobsToProfile(profile, jobs) {
+  const safeProfile = profile || {};
+
   const userSkills = new Set(
-    (profile.skills || []).map((s) => s.toLowerCase?.() || String(s).toLowerCase())
+    (safeProfile.skills || []).map((s) => s.toLowerCase?.() || String(s).toLowerCase())
   );
   const userCerts = new Set(
-    (profile.certifications || []).map((c) => c.toLowerCase?.() || String(c).toLowerCase())
+    (safeProfile.certifications || []).map((c) => c.toLowerCase?.() || String(c).toLowerCase())
   );
 
-  return jobs.map((job) => {
-    const required = (job.requiredSkills || []).map((s) => s.toLowerCase());
+  return (jobs || []).map((job) => {
+    const requiredSkills = job.requiredSkills || [];
+    const required = requiredSkills.map((s) => s.toLowerCase());
     const preferred = (job.preferredSkills || []).map((s) => s.toLowerCase());
     const jobCerts = (job.certifications || []).map((c) => c.toLowerCase());
 
@@ -23,7 +26,9 @@ export function matchJobsToProfile(profile, jobs) {
       (preferredMatch / Math.max(preferred.length, 1)) * 25 +
       (certMatch / Math.max(jobCerts.length, 1)) * 15;
 
-    const missingSkills = required.filter((s) => !userSkills.has(s));
+    const missingSkills = requiredSkills.filter(
+      (skill) => !userSkills.has(skill.toLowerCase())
+    );
     const missingCerts = jobCerts.filter(
       (c) => ![...userCerts].some((uc) => c.includes(uc) || uc.includes(c))
     );
