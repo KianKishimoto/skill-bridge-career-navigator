@@ -37,7 +37,7 @@ describe('matchJobsToProfile', () => {
     expect(result[1].missingSkills).toContain('Spark');
   });
 
-  it('bases match score on required skills so it aligns with role pivot percentage', () => {
+  it('uses weighted required, preferred, and certification scoring', () => {
     const profile = {
       skills: ['AWS', 'Python', 'Docker'],
       certifications: [],
@@ -54,7 +54,7 @@ describe('matchJobsToProfile', () => {
 
     const result = matchJobsToProfile(profile, jobs);
 
-    expect(result[0].matchScore).toBe(100);
+    expect(result[0].matchScore).toBe(70);
     expect(result[0].matchedSkills).toBe(3);
     expect(result[0].preferredMatchedSkills).toBe(0);
     expect(result[0].matchedCertifications).toBe(0);

@@ -66,7 +66,7 @@ describe('rolePivot services', () => {
     const analysis = analyzeRolePivot(profile, jobs[0]);
 
     expect(analysis.targetRole).toBe('Data Engineer I');
-    expect(analysis.matchPercent).toBe(67);
+    expect(analysis.matchPercent).toBe(57);
   });
 
   it('ignores blank certification entries in profile matching', () => {

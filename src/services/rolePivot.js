@@ -1,3 +1,5 @@
+import { calculateMatchScore } from './matchScoring';
+
 function normalizeText(value) {
   return (value || '').toString().trim().toLowerCase();
 }
@@ -65,11 +67,9 @@ function buildAnalysis(profile, target, metadata = {}) {
     (c) => ![...userCerts].some((uc) => c.includes(uc) || uc.includes(c))
   );
 
-  const matchedRequired = requiredSkills.filter((s) => userSkills.has(s));
-  const matchPercent =
-    requiredSkills.length > 0
-      ? Math.round((matchedRequired.length / requiredSkills.length) * 100)
-      : 0;
+  const score = calculateMatchScore(profile, target);
+  const matchedRequired = score.matchedRequired;
+  const matchPercent = score.matchScore;
 
   return {
     targetRole: metadata.targetRole || target.title,

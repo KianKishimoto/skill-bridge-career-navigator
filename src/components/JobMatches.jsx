@@ -119,7 +119,7 @@ export default function JobMatches({ profile, jobs, searchTerm, roleFilter }) {
                   <div><strong>Required experience:</strong> {job.requiredExperience || 'Not listed'}</div>
                   <div><strong>Team:</strong> {job.team || 'Not listed'}</div>
                   <div><strong>Posted date:</strong> {job.postedDate || 'Not listed'}</div>
-                  <div><strong>Match source:</strong> Required-skills baseline {job.matchSource === 'ai' ? ' + AI insights' : ''}</div>
+                  <div><strong>Match source:</strong> Weighted skills/certs baseline {job.matchSource === 'ai' ? ' + AI insights' : ''}</div>
                 </div>
                 {job.aiInsights && (
                   <div>
