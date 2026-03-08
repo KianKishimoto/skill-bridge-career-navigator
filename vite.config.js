@@ -6,9 +6,8 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.js',
-    pool: 'threads',
+    environment: 'node',
+    pool: 'forks',
   },
   server: {
     proxy: {
