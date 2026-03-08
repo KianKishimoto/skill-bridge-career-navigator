@@ -2,13 +2,38 @@ import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import pdf from 'pdf-parse';
-import OpenAI from 'openai';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const loadEnvFromFile = () => {
+  const envPath = path.resolve(__dirname, '..', '.env');
+  if (!fs.existsSync(envPath)) {
+    return;
+  }
+
+  const envFile = fs.readFileSync(envPath, 'utf8');
+  envFile
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith('#'))
+    .forEach((line) => {
+      const separatorIndex = line.indexOf('=');
+      if (separatorIndex <= 0) return;
+
+      const key = line.slice(0, separatorIndex).trim();
+      const value = line.slice(separatorIndex + 1).trim().replace(/^['"]|['"]$/g, '');
+      if (!process.env[key]) {
+        process.env[key] = value;
+      }
+    });
+};
+
+loadEnvFromFile();
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
@@ -28,35 +53,139 @@ const upload = multer({
   },
 });
 
-const extractWithAI = async (resumeText) => {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) throw new Error('OPENAI_API_KEY not configured');
+const extractJsonFromText = (text) => {
+  if (!text) {
+    throw new Error('Empty AI response');
+  }
 
-  const openai = new OpenAI({ apiKey });
-  const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
-    messages: [
-      {
-        role: 'system',
-        content: `Extract structured data from the resume. Return ONLY valid JSON with this exact structure:
+  const cleaned = text.trim();
+  const fencedJson = cleaned.match(/```(?:json)?\n([\s\S]*?)\n```/i);
+  const rawJson = fencedJson ? fencedJson[1] : cleaned;
+
+  return JSON.parse(rawJson);
+};
+
+const normalizeModelName = (modelName) => (
+  modelName.startsWith('models/') ? modelName : `models/${modelName}`
+);
+
+const parseGeminiErrorCode = (errorBody) => {
+  try {
+    const parsed = JSON.parse(errorBody);
+    return parsed?.error?.status;
+  } catch {
+    return null;
+  }
+};
+
+const listSupportedGeminiModels = async (apiKey) => {
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Gemini model listing failed (${response.status}): ${errorBody}`);
+  }
+
+  const data = await response.json();
+  const models = data?.models || [];
+  return models
+    .filter((model) => model?.supportedGenerationMethods?.includes('generateContent'))
+    .map((model) => model.name)
+    .filter(Boolean);
+};
+
+const pickPreferredGeminiModel = (availableModels) => {
+  const preferredModels = [
+    'models/gemini-2.0-flash',
+    'models/gemini-2.0-flash-lite',
+    'models/gemini-1.5-flash-latest',
+    'models/gemini-1.5-flash',
+  ];
+
+  return preferredModels.find((model) => availableModels.includes(model)) || availableModels[0];
+};
+
+const buildGeminiRequest = (resumeText) => ({
+  generationConfig: {
+    temperature: 0.2,
+    responseMimeType: 'application/json',
+  },
+  contents: [
+    {
+      parts: [
+        {
+          text: `Extract structured data from the resume. Return ONLY valid JSON with this exact structure:
 {
   "skills": ["skill1", "skill2"],
   "experience": [{"title": "Job Title", "company": "Company", "years": number}],
   "education": ["degree or institution"],
   "certifications": ["cert1", "cert2"]
 }
-Use empty arrays for missing sections. Skills should be technical (e.g., Python, AWS, React).`,
-      },
-      { role: 'user', content: resumeText },
-    ],
-    response_format: { type: 'json_object' },
-    temperature: 0.2,
+Use empty arrays for missing sections. Skills should be technical (e.g., Python, AWS, React).
+
+Resume:
+${resumeText}`,
+        },
+      ],
+    },
+  ],
+});
+
+const requestGeminiExtraction = async ({ apiKey, model, resumeText }) => {
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/${normalizeModelName(model)}:generateContent?key=${apiKey}`;
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(buildGeminiRequest(resumeText)),
   });
 
-  const content = response.choices[0]?.message?.content;
-  if (!content) throw new Error('Empty AI response');
-  return JSON.parse(content);
+  if (!response.ok) {
+    const errorBody = await response.text();
+    const errorCode = parseGeminiErrorCode(errorBody);
+    const error = new Error(`Gemini API request failed (${response.status}): ${errorBody}`);
+    error.status = response.status;
+    error.code = errorCode;
+    throw error;
+  }
+
+  const data = await response.json();
+  const content = data?.candidates?.[0]?.content?.parts?.map((part) => part?.text || '').join('\n');
+  return extractJsonFromText(content);
 };
+
+const extractWithAI = async (resumeText) => {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error('GEMINI_API_KEY not configured');
+
+  const configuredModel = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+
+  try {
+    return await requestGeminiExtraction({
+      apiKey,
+      model: configuredModel,
+      resumeText,
+    });
+  } catch (error) {
+    const shouldRetryWithDetectedModel = (
+      !process.env.GEMINI_MODEL
+      && error.status === 404
+      && error.code === 'NOT_FOUND'
+    );
+
+    if (!shouldRetryWithDetectedModel) {
+      throw error;
+    }
+
+    const availableModels = await listSupportedGeminiModels(apiKey);
+    const detectedModel = pickPreferredGeminiModel(availableModels);
+
+    if (!detectedModel) {
+      throw new Error('No Gemini models with generateContent support are available for this API key');
+    }
+
+    return requestGeminiExtraction({ apiKey, model: detectedModel, resumeText });
+  }
+};
+
 
 const extractWithFallback = (resumeText) => {
   const skills = [];
@@ -178,7 +307,7 @@ app.post('/api/extract-resume/text', async (req, res) => {
 });
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', aiConfigured: !!process.env.OPENAI_API_KEY });
+  res.json({ status: 'ok', aiConfigured: !!process.env.GEMINI_API_KEY });
 });
 
 app.listen(PORT, () => {
