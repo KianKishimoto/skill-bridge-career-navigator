@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import pdf from 'pdf-parse';
 import OpenAI from 'openai';
@@ -9,6 +10,31 @@ import OpenAI from 'openai';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const loadEnvFromFile = () => {
+  const envPath = path.resolve(__dirname, '..', '.env');
+  if (!fs.existsSync(envPath)) {
+    return;
+  }
+
+  const envFile = fs.readFileSync(envPath, 'utf8');
+  envFile
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith('#'))
+    .forEach((line) => {
+      const separatorIndex = line.indexOf('=');
+      if (separatorIndex <= 0) return;
+
+      const key = line.slice(0, separatorIndex).trim();
+      const value = line.slice(separatorIndex + 1).trim().replace(/^['"]|['"]$/g, '');
+      if (!process.env[key]) {
+        process.env[key] = value;
+      }
+    });
+};
+
+loadEnvFromFile();
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
