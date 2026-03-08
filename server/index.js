@@ -4,7 +4,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import pdf from 'pdf-parse';
+import { PDFParse } from 'pdf-parse';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -242,8 +242,9 @@ app.post('/api/extract-resume', upload.single('resume'), async (req, res) => {
 
     if (req.file) {
       if (req.file.mimetype === 'application/pdf') {
-        const data = await pdf(req.file.buffer);
-        resumeText = data.text;
+        const parser = new PDFParse({ data: req.file.buffer });
+        const result = await parser.getText();
+        resumeText = result?.text ?? '';
       } else if (req.file.mimetype === 'text/plain') {
         resumeText = req.file.buffer.toString('utf-8');
       }
