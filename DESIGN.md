@@ -116,7 +116,6 @@ This consistent shape enables all downstream modules (matching, recommendations,
 
 ## 6) Non-Functional Considerations
 ### Performance
-- Local JSON-backed data access keeps response latency low.
 - In-memory processing is fast for small files; upload limits reduce risk of oversized inputs.
 
 ### Reliability
@@ -129,7 +128,6 @@ This consistent shape enables all downstream modules (matching, recommendations,
 - Future production version should add input sanitization, auth, and secure storage policies.
 
 ### UX
-- Single-page workflow minimizes context switching.
 - Search/filter/target-role controls make outputs actionable rather than static.
 
 ---
@@ -184,17 +182,3 @@ Planned and suggested improvements to make the system more useful:
     - Add structured logs, metrics, error dashboards, and product analytics.
 15. **Evaluation harness for AI prompts**
     - Build repeatable test fixtures and prompt regression checks for output quality.
-
----
-
-## 9) Success Metrics (Suggested)
-- Time to first actionable recommendation
-- Resume extraction correction rate (how much users edit)
-- Recommendation click-through/acceptance rate
-- Percentage of users selecting a target role and completing a plan
-- User-reported usefulness score after session
-
----
-
-## 10) Summary
-The current implementation provides a strong MVP for skill-bridge career planning: structured profile extraction, job matching, certification guidance, and role-pivot visibility in one streamlined workflow. The next phase should focus on deeper personalization, real-world data integrations, and end-to-end coaching features (especially resume/cover-letter improvement) to increase practical value.
