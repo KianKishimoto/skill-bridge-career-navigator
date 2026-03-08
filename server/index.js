@@ -65,49 +65,127 @@ const extractJsonFromText = (text) => {
   return JSON.parse(rawJson);
 };
 
-const extractWithAI = async (resumeText) => {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) throw new Error('GEMINI_API_KEY not configured');
+const normalizeModelName = (modelName) => (
+  modelName.startsWith('models/') ? modelName : `models/${modelName}`
+);
 
-  const model = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+const parseGeminiErrorCode = (errorBody) => {
+  try {
+    const parsed = JSON.parse(errorBody);
+    return parsed?.error?.status;
+  } catch {
+    return null;
+  }
+};
 
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      generationConfig: {
-        temperature: 0.2,
-        responseMimeType: 'application/json',
-      },
-      contents: [
+const listSupportedGeminiModels = async (apiKey) => {
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Gemini model listing failed (${response.status}): ${errorBody}`);
+  }
+
+  const data = await response.json();
+  const models = data?.models || [];
+  return models
+    .filter((model) => model?.supportedGenerationMethods?.includes('generateContent'))
+    .map((model) => model.name)
+    .filter(Boolean);
+};
+
+const pickPreferredGeminiModel = (availableModels) => {
+  const preferredModels = [
+    'models/gemini-2.0-flash',
+    'models/gemini-2.0-flash-lite',
+    'models/gemini-1.5-flash-latest',
+    'models/gemini-1.5-flash',
+  ];
+
+  return preferredModels.find((model) => availableModels.includes(model)) || availableModels[0];
+};
+
+const buildGeminiRequest = (resumeText) => ({
+  generationConfig: {
+    temperature: 0.2,
+    responseMimeType: 'application/json',
+  },
+  contents: [
+    {
+      parts: [
         {
-          parts: [
-            {
-              text: `Extract structured data from the resume. Return ONLY valid JSON with this exact structure:
+          text: `Extract structured data from the resume. Return ONLY valid JSON with this exact structure:
 {
   "skills": ["skill1", "skill2"],
   "experience": [{"title": "Job Title", "company": "Company", "years": number}],
   "education": ["degree or institution"],
   "certifications": ["cert1", "cert2"]
 }
-Use empty arrays for missing sections. Skills should be technical (e.g., Python, AWS, React).\n\nResume:\n${resumeText}`
-            },
-          ],
+Use empty arrays for missing sections. Skills should be technical (e.g., Python, AWS, React).
+
+Resume:
+${resumeText}`,
         },
       ],
-    }),
+    },
+  ],
+});
+
+const requestGeminiExtraction = async ({ apiKey, model, resumeText }) => {
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/${normalizeModelName(model)}:generateContent?key=${apiKey}`;
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(buildGeminiRequest(resumeText)),
   });
 
   if (!response.ok) {
     const errorBody = await response.text();
-    throw new Error(`Gemini API request failed (${response.status}): ${errorBody}`);
+    const errorCode = parseGeminiErrorCode(errorBody);
+    const error = new Error(`Gemini API request failed (${response.status}): ${errorBody}`);
+    error.status = response.status;
+    error.code = errorCode;
+    throw error;
   }
 
   const data = await response.json();
   const content = data?.candidates?.[0]?.content?.parts?.map((part) => part?.text || '').join('\n');
   return extractJsonFromText(content);
 };
+
+const extractWithAI = async (resumeText) => {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error('GEMINI_API_KEY not configured');
+
+  const configuredModel = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+
+  try {
+    return await requestGeminiExtraction({
+      apiKey,
+      model: configuredModel,
+      resumeText,
+    });
+  } catch (error) {
+    const shouldRetryWithDetectedModel = (
+      !process.env.GEMINI_MODEL
+      && error.status === 404
+      && error.code === 'NOT_FOUND'
+    );
+
+    if (!shouldRetryWithDetectedModel) {
+      throw error;
+    }
+
+    const availableModels = await listSupportedGeminiModels(apiKey);
+    const detectedModel = pickPreferredGeminiModel(availableModels);
+
+    if (!detectedModel) {
+      throw new Error('No Gemini models with generateContent support are available for this API key');
+    }
+
+    return requestGeminiExtraction({ apiKey, model: detectedModel, resumeText });
+  }
+};
+
 
 const extractWithFallback = (resumeText) => {
   const skills = [];
