@@ -37,7 +37,7 @@ describe('matchJobsToProfile', () => {
     expect(result[1].missingSkills).toContain('Spark');
   });
 
-  it('uses weighted required, preferred, and certification scoring', () => {
+  it('returns 100 when all required skills are met', () => {
     const profile = {
       skills: ['AWS', 'Python', 'Docker'],
       certifications: [],
