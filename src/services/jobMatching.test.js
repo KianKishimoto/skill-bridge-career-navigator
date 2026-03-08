@@ -37,6 +37,29 @@ describe('matchJobsToProfile', () => {
     expect(result[1].missingSkills).toContain('Spark');
   });
 
+  it('bases match score on required skills so it aligns with role pivot percentage', () => {
+    const profile = {
+      skills: ['AWS', 'Python', 'Docker'],
+      certifications: [],
+    };
+    const jobs = [
+      {
+        id: 'j3',
+        title: 'Platform Engineer',
+        requiredSkills: ['AWS', 'Python', 'Docker'],
+        preferredSkills: ['Kubernetes', 'Terraform'],
+        certifications: ['AWS Certified Solutions Architect'],
+      },
+    ];
+
+    const result = matchJobsToProfile(profile, jobs);
+
+    expect(result[0].matchScore).toBe(100);
+    expect(result[0].matchedSkills).toBe(3);
+    expect(result[0].preferredMatchedSkills).toBe(0);
+    expect(result[0].matchedCertifications).toBe(0);
+  });
+
   it('handles empty profile and edge cases', () => {
     const profile = { skills: [], certifications: [] };
     const result = matchJobsToProfile(profile, mockJobs);
